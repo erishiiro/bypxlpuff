@@ -23,8 +23,9 @@
             <a href="wishlist.html" aria-label="Wishlist">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
             </a>
-            <a href="cart.html" aria-label="Cart">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+            <a href="cart.html" aria-label="Cart" style="position: relative;">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+            <span class="cart-counter" style="position: absolute; top: -8px; right: -8px; background: var(--burgundy); color: white; font-size: 10px; min-width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-weight: 600;">0</span>
             </a>
             <a href="login.html" aria-label="Menu">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -52,60 +53,146 @@
             <p class="price">₱ 499</p>
             <p class="meta brand d-flex align-items-center"><strong>BRAND:</strong><span>by pxlpuff</span></p>
         
-        <!-- COLOR SELECTION -->
-         <p class="meta colour d-flex align-items-center"><strong>COLOUR:</strong></p>
-          <div id="color-picker" style="display: flex; gap: 12px; margin: 8px 0 20px 0;">
-            <button type="button" data-color="Old Rose" style="width: 30px; height: 30px; border-radius: 50%; background: var(--old-rose); border: 3px solid #000; cursor: pointer; padding: 0;" aria-label="Old Rose"></button>
-            <button type="button" data-color="Sage" style="width: 30px; height: 30px; border-radius: 50%; background: var(--sage); border: 3px solid #ccc; cursor: pointer; padding: 0;" aria-label="Sage"></button>
-            <button type="button" data-color="Blue" style="width: 30px; height: 30px; border-radius: 50%; background: var(--blue); border: 3px solid #ccc; cursor: pointer; padding: 0;" aria-label="Blue"></button>
-          </div>
-
-                <!-- SIZE -->
-        <div class="size-options">
-          <button class="size-btn" data-size="S">S</button>
-          <button class="size-btn" data-size="M">M</button>
-          <button class="size-btn" data-size="L">L</button>
-          <button class="size-btn" data-size="XL">XL</button>
+<!-- COLOR SELECTOR -->
+      <div class="mb-3">
+        <p class="mb-2"><strong>COLOUR:</strong></p>
+        <div id="color-picker" class="d-flex gap-2">
+          <button 
+            type="button"
+            data-color="Sage"
+            data-main="images/products/dont-be-late-tee-main-sage.png"
+            data-thumb1="images/products/dont-be-late-tee-thumb-1-sage.png"
+            data-thumb2="images/products/dont-be-late-tee-thumb-2-sage.png"
+            style="width: 24px; height: 24px; border-radius: 50%; background: #A8B89A; border: 2px solid #ccc; padding: 0; cursor: pointer;"
+          ></button>
+          <button 
+            type="button"
+            data-color="Old Rose"
+            data-main="images/products/dont-be-late-tee-main.png"
+            data-thumb1="images/products/dont-be-late-tee-thumb-1.png"
+            data-thumb2="images/products/dont-be-late-tee-thumb-2.png"
+            style="width: 24px; height: 24px; border-radius: 50%; background: #D97282; border: 2px solid #ccc; padding: 0; cursor: pointer;"
+          ></button>
+          <button 
+            type="button"
+            data-color="Blue"
+            data-main="images/products/cart-dont-be-late-tee-blue.png"
+            data-thumb1="images/products/cart-dont-be-late-tee-main-blue.png"
+            data-thumb2="images/products/dont-be-late-tee-thumb-2-blue.png"
+            style="width: 24px; height: 24px; border-radius: 50%; background: #8FA9BD; border: 2px solid #ccc; padding: 0; cursor: pointer;"
+          ></button>
         </div>
+      </div>
+       
 
-        <!-- QUANTITY -->
-        <div class="quantity-wrapper">
-          <button class="quantity-btn qty-minus">−</button>
-          <span class="quantity-value">1</span>
-          <button class="quantity-btn qty-plus">+</button>
-        </div>
 
-        <!-- BUTTONS -->
-        <div class="action-buttons">
-          <button class="add-to-cart-btn">🛒 Add to Cart</button>
+    <!-- SIZE SELECTION -->
+    <div class="mb-4">
+      <p class="mb-2"><strong>SIZE:</strong></p>
+      <div class="d-flex gap-2">
+        <button class="size-btn selected" data-size="S">S</button>
+        <button class="size-btn" data-size="M">M</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="XL">XL</button>
+      </div>
+    </div>
+
+    <!-- QUANTITY -->
+    <div class="mb-4">
+      <p class="mb-2"><strong>QUANTITY:</strong></p>
+      <div class="d-flex align-items-center gap-2">
+        <button class="qty-btn" id="qty-minus">−</button>
+        <span id="qty-value" class="px-2">1</span>
+        <button class="qty-btn" id="qty-plus">+</button>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+          <button class="add-to-cart-btn" onclick="
+              if (!selectedColor) { alert('Select a color first!'); return; }
+              if (!selectedSize) { alert('Select a size first!'); return; }
+              addToCart('everyday-comfort-tee', 'Everyday Comfort Tee', 499, selectedColor, selectedSize, 'pic-everyday-comfort-tee');
+              alert('✅ Added to cart!');
+            ">
+              🛒 Add to Cart
+            </button>
+
+
+
           <button class="order-now-btn">✨ Order Now</button>
         </div>
 
 
-        <!--WISHLIST -->
-        <button type="button" id="wish-button" data-id="dont-be-late-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
+        <!-- WISHLIST -->
+        <button type="button" id="wish-button" data-id="do-good-work-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
             <svg id="heart-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
             Add to Wishlist
         </button>
 
-                <div class="description">
-                    <h4>Description:</h4>
-                    <p>This casual everyday wear tee features the simple message “Don’t be late.” printed across the chest. It works as a gentle reminder to keep track of your schedule, get moving, and make the most out of each day.</p>
-                </div>
-            </div>
-        </section>
+    <!-- DESCRIPTION -->
+    <div class="mt-4">
+      <h5>Description:</h5>
+      <p>This soft, comfortable tee — do good work. It's a gentle reminder: be proud of what you create, stay consistent, and take it one day at a time.</p>
+    </div>
+  </div>
+</div>
 
-      </main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let quantity = 1;
 
-      <footer class="site-footer d-flex align-items-center justify-content-between">
-        <span class="footer-logo" role="img" aria-label="by pxlpuff"></span>
-        <div class="footer-links d-flex flex-column">
-            <a href="privacy-policy.html" class="page-link">Privacy Policy</a>
-            <span class="page-link">Copyright</span>
-        </div>
-    </footer>
-    <script src="js/main.js"></script>
+  // ===== COLOR BUTTONS =====
+  const colorButtons = document.querySelectorAll('.color-btn');
+  const mainImg = document.getElementById('main-image');
+  const thumb1 = document.getElementById('thumb-1');
+  const thumb2 = document.getElementById('thumb-2');
+
+  colorButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      colorButtons.forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      mainImg.src = this.dataset.main;
+      thumb1.src = this.dataset.thumb1;
+      thumb2.src = this.dataset.thumb2;
+    });
+  });
+
+  // ===== SIZE BUTTONS =====
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      sizeButtons.forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+
+  // ===== QUANTITY BUTTONS =====
+  const minusBtn = document.getElementById('qty-minus');
+  const plusBtn = document.getElementById('qty-plus');
+  const qtyDisplay = document.getElementById('qty-value');
+
+  minusBtn.addEventListener('click', function() {
+    if (quantity > 1) {
+      quantity--;
+      qtyDisplay.textContent = quantity;
+    }
+  });
+
+  plusBtn.addEventListener('click', function() {
+    quantity++;
+    qtyDisplay.textContent = quantity;
+  });
+
+  // ===== ADD TO CART =====
+  document.getElementById('add-to-cart').addEventListener('click', function() {
+    alert('✅ Added to cart!');
+  });
+});
+</script>
+
 </body>
 </html>
+
+      
