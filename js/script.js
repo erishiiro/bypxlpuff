@@ -98,49 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+   
     // ======================================
-    // 3. CONTACT INQUIRY FORM
-    // ======================================
-
-    const contactForm = document.querySelector("#contactForm");
-
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (event) {
-
-            event.preventDefault();
-
-            const name = document.querySelector("#contactName").value.trim();
-            const email = document.querySelector("#contactEmail").value.trim();
-            const subjectText = document.querySelector("#contactSubject").value.trim();
-            const message = document.querySelector("#contactMessage").value.trim();
-
-            if (!name || !email || !subjectText || !message) {
-                alert("Please complete all fields.");
-                return;
-            }
-
-            const recipient = "hello@examplewebsite142.com";
-
-            const subject = encodeURIComponent(subjectText);
-
-            const body = encodeURIComponent(
-                "Hello by pxlpuff!\n\n" +
-                "Name: " + name + "\n" +
-                "Email: " + email + "\n\n" +
-                "Message:\n" + message
-            );
-
-            window.location.href =
-                "mailto:" + recipient +
-                "?subject=" + subject +
-                "&body=" + body;
-
-        });
-    }
-
-
-    // ======================================
-    // 4. PRODUCT SEARCH + RECENT SEARCHES
+    // 3. PRODUCT SEARCH + RECENT SEARCHES
     // ======================================
 
     const searchForm = document.querySelector(".search-box");
