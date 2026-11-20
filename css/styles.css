@@ -29,6 +29,8 @@ html {
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  line-height: normal;
   color: #000;
   background: #fff;
   overflow-x: hidden;
@@ -77,7 +79,7 @@ svg {
   width: calc(120 * var(--p));
   height: calc(120 * var(--p));
   border-radius: 50%;
-  background: #000 url("images/logo.png") 39.36% 33.75% / 178.33% auto no-repeat;
+  background: #000 url("../images/logo.png") 39.36% 33.75% / 178.33% auto no-repeat;
 }
 
 .site-header nav {
@@ -130,7 +132,7 @@ svg {
   display: block;
   width: calc(120 * var(--p));
   height: calc(120 * var(--p));
-  background: url("images/footer-logo.png") center / cover no-repeat;
+  background: url("../images/footer-logo.png") center / cover no-repeat;
 }
 
 .footer-links {
@@ -157,6 +159,9 @@ svg {
   display: flex;
   align-items: center;
   gap: calc(14 * var(--p));
+  margin-bottom: 0;
+  padding: 0;
+  background: none;
   font-size: calc(36 * var(--p));
   font-weight: 500;
   line-height: calc(41 * var(--p));
@@ -216,24 +221,64 @@ svg {
   line-height: calc(36 * var(--p));
 }
 
-.btn {
+.hero .btn {
   display: block;
   width: calc(290 * var(--p));
   height: calc(61 * var(--p));
   margin: calc(87 * var(--p)) 0 0 calc(64 * var(--p));
   border-radius: calc(10 * var(--p));
-  background: var(--burgundy);
-  color: #fff;
   font-size: calc(24 * var(--p));
   font-weight: 700;
   line-height: calc(61 * var(--p));
   text-align: center;
 }
 
+/* Bootstrap .btn, coloured with the Figma palette through Bootstrap's own CSS variables */
+.btn-figma {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--burgundy);
+  --bs-btn-border-color: var(--burgundy);
+  --bs-btn-border-width: 0;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #8E2A42;
+  --bs-btn-hover-border-color: #8E2A42;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #8E2A42;
+  --bs-btn-active-border-color: #8E2A42;
+  --bs-btn-focus-shadow-rgb: 168, 50, 80;
+  --bs-btn-padding-x: 0;
+  --bs-btn-padding-y: 0;
+  --bs-btn-font-weight: 700;
+  --bs-btn-font-family: 'Poppins', sans-serif;
+}
+
+.btn-figma.dark {
+  --bs-btn-bg: #000;
+  --bs-btn-border-color: #000;
+  --bs-btn-hover-bg: #333;
+  --bs-btn-hover-border-color: #333;
+  --bs-btn-active-bg: #333;
+  --bs-btn-active-border-color: #333;
+  --bs-btn-focus-shadow-rgb: 0, 0, 0;
+}
+
+.btn-figma.blue {
+  --bs-btn-color: #000;
+  --bs-btn-bg: var(--blue);
+  --bs-btn-border-color: var(--blue);
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #7D98AB;
+  --bs-btn-hover-border-color: #7D98AB;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #7D98AB;
+  --bs-btn-active-border-color: #7D98AB;
+  --bs-btn-focus-shadow-rgb: 143, 169, 189;
+}
+
 .hero-image {
   flex: 0 0 calc(483 * var(--p));
   height: calc(379 * var(--p));
-  background: url("images/hero.png") center / cover no-repeat;
+  background: url("../images/hero.png") center / cover no-repeat;
 }
 
 .whats-new {
@@ -294,7 +339,7 @@ svg {
 .about-image {
   flex: 0 0 calc(508 * var(--p));
   height: calc(366 * var(--p));
-  background: url("images/about.jpg") 50% 50.1% / 113% auto no-repeat;
+  background: url("../images/about.jpg") 50% 50.1% / 113% auto no-repeat;
 }
 
 .about-text {
@@ -482,7 +527,7 @@ svg {
   background: #000;
 }
 
-.row {
+.size-qty {
   display: flex;
   align-items: center;
   gap: calc(12 * var(--p));
@@ -540,8 +585,6 @@ svg {
 .btn-flat {
   display: block;
   height: calc(38 * var(--p));
-  background: var(--burgundy);
-  color: #fff;
   font-size: calc(24 * var(--p));
   font-weight: 700;
   line-height: calc(38 * var(--p));
@@ -559,8 +602,7 @@ svg {
   height: calc(37 * var(--p));
   margin-top: calc(8 * var(--p));
   padding-left: calc(7 * var(--p));
-  background: var(--burgundy);
-  color: #fff;
+  justify-content: flex-start;
   font-size: calc(24 * var(--p));
   font-weight: 600;
 }
@@ -682,6 +724,12 @@ svg {
   color: var(--muted);
 }
 
+/* Bootstrap .form-control focus ring replaced with the Figma black border */
+.form-control:focus {
+  border-color: #000;
+  box-shadow: none;
+}
+
 .forgot {
   display: block;
   margin: calc(5 * var(--p)) 0 0 calc(5 * var(--p));
@@ -701,15 +749,11 @@ svg {
   width: calc(212 * var(--p));
   height: calc(50 * var(--p));
   border-radius: calc(7 * var(--p));
-  color: #fff;
   font-size: calc(24 * var(--p));
   font-weight: 700;
   line-height: calc(50 * var(--p));
   text-align: center;
 }
-
-.btn-auth.primary { background: var(--burgundy); }
-.btn-auth.dark { background: #000; }
 
 .auth-stack {
   margin-top: calc(11 * var(--p));
@@ -869,8 +913,6 @@ svg {
 
 .subscribe button {
   margin-top: calc(21 * var(--p));
-  background: var(--blue);
-  cursor: pointer;
 }
 
 /* ---------- Search ---------- */
@@ -997,7 +1039,7 @@ svg {
   .site-footer {
     height: auto;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center !important;
     gap: calc(16 * var(--p));
     padding: calc(24 * var(--p));
   }
@@ -1017,7 +1059,7 @@ svg {
   }
   .hero-text { flex: none; width: 100%; }
   .hero p { width: auto; }
-  .btn { margin-left: 0; margin-top: calc(32 * var(--p)); width: 100%; max-width: calc(290 * var(--p) * 1.4); }
+  .hero .btn { margin-left: 0; margin-top: calc(32 * var(--p)); width: 100%; max-width: calc(290 * var(--p) * 1.4); }
   .hero-image { flex: none; width: 100%; height: auto; aspect-ratio: 483 / 379; }
   .whats-new { min-height: 0; padding: calc(40 * var(--p)) calc(24 * var(--p)); }
   .product-grid { flex-direction: column; align-items: center; gap: calc(40 * var(--p)); }
