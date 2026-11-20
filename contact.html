@@ -140,38 +140,32 @@
     </div>
   </footer>
 
-<script src="js/script.js"></script>
-
 <script>
-const TO_ADDRESS = "hello@examplewebsite142.com";
+  // Contact form JavaScript Method #2
+  const TO_ADDRESS = "hello@examplewebsite142.com";
 
-const form = document.querySelector("#contactForm");
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-function buildMailto() {
-    const name = document.querySelector("#contactName").value;
-    const email = document.querySelector("#contactEmail").value;
-    const topic = document.querySelector("#contactSubject").value;
-    const text = document.querySelector("#contactMessage").value;
+    const name = document.getElementById("contactName").value.trim();
+    const email = document.getElementById("contactEmail").value.trim();
+    const topic = document.getElementById("contactSubject").value.trim();
+    const message = document.getElementById("contactMessage").value.trim();
 
     const subject = "Website message: " + topic;
 
     const body =
-        "Name: " + name + "\r\n" +
-        "Email: " + email + "\r\n\r\n" +
-        text;
+      "Hello, by pxlpuff!\r\n\r\n" +
+      "Name: " + name + "\r\n" +
+      "Email: " + email + "\r\n\r\n" +
+      message;
 
-    return (
-        "mailto:" + TO_ADDRESS +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body)
-    );
-}
+    const mailto = "mailto:" + TO_ADDRESS +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
 
-form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    window.location.href = buildMailto();
-});
+    window.open(mailto, "_self");
+  });
 </script>
-
 </body>
 </html>
