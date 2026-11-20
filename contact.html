@@ -64,7 +64,7 @@
 
       <h2 class="text-center mb-4">Send Us a Message ♡</h2>
 
-      <form id="contactForm">
+     <form id="contactForm" action="#">
 
         <div class="mb-3">
           <label for="contactName" class="form-label">
@@ -139,6 +139,39 @@
       <span class="page-link">Copyright</span>
     </div>
   </footer>
-  <script src="js/script.js"></script>
+
+<script src="js/script.js"></script>
+
+<script>
+const TO_ADDRESS = "hello@examplewebsite142.com";
+
+const form = document.querySelector("#contactForm");
+
+function buildMailto() {
+    const name = document.querySelector("#contactName").value;
+    const email = document.querySelector("#contactEmail").value;
+    const topic = document.querySelector("#contactSubject").value;
+    const text = document.querySelector("#contactMessage").value;
+
+    const subject = "Website message: " + topic;
+
+    const body =
+        "Name: " + name + "\r\n" +
+        "Email: " + email + "\r\n\r\n" +
+        text;
+
+    return (
+        "mailto:" + TO_ADDRESS +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body)
+    );
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    window.location.href = buildMailto();
+});
+</script>
+
 </body>
 </html>
