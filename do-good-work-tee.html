@@ -23,8 +23,9 @@
             <a href="wishlist.html" aria-label="Wishlist">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
             </a>
-            <a href="cart.html" aria-label="Cart">
+            <a href="cart.html" aria-label="Cart" style="position: relative;">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+                <span class="cart-counter" style="position: absolute; top: -8px; right: -8px; background: var(--burgundy); color: white; font-size: 10px; min-width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-weight: 600;">0</span>
             </a>
             <a href="login.html" aria-label="Menu">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -45,7 +46,10 @@
             <div class="thumb pic-do-good-work-tee-thumb-1" role="img" aria-label="Do Good Work Tee, front view"></div>
             <div class="thumb pic-do-good-work-tee-thumb-2" role="img" aria-label="Do Good Work Tee, back view"></div>
         </div>
-        <div class="main-image pic-do-good-work-tee-main" role="img" aria-label="Do Good Work Tee, front view"></div>
+        <div id="main-product-image" style="width:300px;height:375px;">
+          <img src="images/do-good-work-white.jpg" alt="Do Good Work Tee - White" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+
 
         <div class="info">
             <h1>Do Good Work Tee</h1>
@@ -53,11 +57,26 @@
             <p class="meta brand d-flex align-items-center"><strong>BRAND:</strong><span>by pxlpuff</span></p>
         
         <!-- COLOR SELECTION -->
-            <p class="meta colour d-flex align-items-center"><strong>COLOUR:</strong></p>
-            <div id="color-picker" style="display: flex; gap: 12px; margin: 8px 0 20px 0;">
-            <button type="button" data-color="Peach Cream" style="width: 30px; height: 30px; border-radius: 50%; background: var(--peach-cream); border: 3px solid #000; cursor: pointer; padding: 0;" aria-label="Peach Cream"></button>
-            <button type="button" data-color="Lavender" style="width: 30px; height: 30px; border-radius: 50%; background: var(--lavender); border: 3px solid #ccc; cursor: pointer; padding: 0;" aria-label="Lavender"></button>
-        </div>
+<div>
+  <p style="margin-bottom: 8px;"><strong>COLOUR:</strong></p>
+  <div id="color-picker" style="display: flex; gap: 12px;">
+    <button 
+      type="button" 
+      data-color="peach-cream"
+      data-image="images/products/do-good-work-tee-main.jpg"
+      style="width: 26px; height: 26px; border-radius: 50%; background: #FCEEE0; border: 3px solid #cccccc; cursor: pointer; padding: 0;"
+    ></button>
+
+    <button 
+      type="button" 
+      data-color="lavander"
+      data-image="images/do-good-work-lavander.jpg"
+      style="width: 26px; height: 26px; border-radius: 50%; background: #add8e6; border: 3px solid #E3CEF7; cursor: pointer; padding: 0;"
+    ></button>
+
+  </div>
+</div>
+
 
                 <!-- SIZE -->
         <div class="size-options">
@@ -76,12 +95,20 @@
 
         <!-- BUTTONS -->
         <div class="action-buttons">
-          <button class="add-to-cart-btn">🛒 Add to Cart</button>
-          <button class="order-now-btn">✨ Order Now</button>
+            <button class="add-to-cart-btn" onclick="
+                if (!selectedColor) { alert('Select a color first!'); return; }
+                if (!selectedSize) { alert('Select a size first!'); return; }
+                addToCart('do-good-work-tee', 'Do Good Work Tee', 499, selectedColor, selectedSize, 'pic-do-good-work-tee');
+                alert('✅ Added to cart!');
+                ">
+                🛒 Add to Cart
+            </button>
+
+            <button class="order-now-btn">✨ Order Now</button>
         </div>
 
 
-        <!-- WISHLIST -->
+        <!-- ❤️ WISHLIST -->
         <button type="button" id="wish-button" data-id="do-good-work-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
             <svg id="heart-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
