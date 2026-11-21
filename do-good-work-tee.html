@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +24,8 @@
             <a href="wishlist.html" aria-label="Wishlist">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
             </a>
-            <a href="cart.html" aria-label="Cart" style="position: relative;">
+            <a href="cart.html" aria-label="Cart">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
-                <span class="cart-counter" style="position: absolute; top: -8px; right: -8px; background: var(--burgundy); color: white; font-size: 10px; min-width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-weight: 600;">0</span>
             </a>
             <a href="login.html" aria-label="Menu">
                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -46,260 +46,112 @@
             <div class="thumb pic-do-good-work-tee-thumb-1" role="img" aria-label="Do Good Work Tee, front view"></div>
             <div class="thumb pic-do-good-work-tee-thumb-2" role="img" aria-label="Do Good Work Tee, back view"></div>
         </div>
-        <div id="main-product-image" style="width:300px;height:375px;">
-          <img src="images/do-good-work-white.jpg" alt="Do Good Work Tee - White" style="width:100%;height:100%;object-fit:cover;">
-        </div>
 
+<div class="main-image" 
+     role="img" 
+     aria-label="Do Good Work Tee, front view"
+     style="width: 300px; height: 375px; background: transparent; border: none;">
 
+    <img 
+        src="images/products/do-good-work-tee-main.png"
+        alt="Do Good Work Tee, front view"
+        style="width: 100%; height: 100%; object-fit: contain; display: block; border: none;">
+
+</div>
         <div class="info">
             <h1>Do Good Work Tee</h1>
             <p class="price">₱ 499</p>
-            <p class="meta brand d-flex align-items-center"><strong>BRAND:</strong><span>by pxlpuff</span></p>
-        
-        <!-- COLOR SELECTION -->
-<div>
-  <p style="margin-bottom: 8px;"><strong>COLOUR:</strong></p>
-  <div id="color-picker" style="display: flex; gap: 12px;">
-    <button 
-      type="button" 
-      data-color="peach-cream"
-      data-image="images/products/do-good-work-tee-main.jpg"
-      style="width: 26px; height: 26px; border-radius: 50%; background: #F8F8F8; border: 3px solid #000; cursor: pointer; padding: 0;"
-    ></button>
+            <p class="meta brand d-flex align-items-center">
+                <strong>BRAND:</strong><span>by pxlpuff</span>
+            </p>
 
-    <button 
-      type="button" 
-      data-color="lavander"
-      data-image="images/do-good-work-lavander.jpg"
-      style="width: 26px; height: 26px; border-radius: 50%; background: #BFD7EA; border: 3px solid #ccc; cursor: pointer; padding: 0;"
-    ></button>
+            <!-- COLOR SELECTION -->
+            <p class="meta colour d-flex align-items-center">
+                <strong>COLOUR:</strong>
+            </p>
 
-  </div>
-</div>
+            <div id="color-picker" style="display: flex; gap: 12px; margin: 8px 0 20px 0;">
+                <button
+                    type="button"
+                    data-color="peach-cream"
+                    style="width: 30px; height: 30px; border-radius: 50%; background: #FCEEE0; border: 3px solid #000; cursor: pointer; padding: 0;"
+                    aria-label="Peach Cream">
+                </button>
 
-
-                <!-- SIZE -->
-        <p style="margin: 16px 0 8px;"><strong>SIZE:</strong></p>
-        <div class="size-options">
-          <button class="size-btn" data-size="S">S</button>
-          <button class="size-btn" data-size="M">M</button>
-          <button class="size-btn" data-size="L">L</button>
-          <button class="size-btn" data-size="XL">XL</button>
-        </div>
-
-        <!-- QUANTITY -->
-        <div class="quantity-wrapper">
-          <button class="quantity-btn qty-minus">−</button>
-          <span class="quantity-value">1</span>
-          <button class="quantity-btn qty-plus">+</button>
-        </div>
-
-        <!-- BUTTONS -->
-        <div class="action-buttons">
-          <button class="add-to-cart-btn" onclick="
-            if (!selectedColor) { alert('Select a color first!'); return; }
-            if (!selectedSize) { alert('Select a size first!'); return; }
-            addToCart('do-good-work-tee', 'Do Good Work Tee', 499, selectedColor, selectedSize, currentImageSrc);
-            alert('✅ Added to cart!');
-          ">
-            🛒 Add to Cart
-          </button>
-
-          <button class="order-now-btn" onclick="
-          if (!selectedColor) { alert('Select a color first!'); return; }
-          if (!selectedSize) { alert('Select a size first!'); return; }
-          addToCart('everyday-comfort-tee', 'Everyday Comfort Tee', 499, selectedColor, selectedSize, currentImageSrc);
-          window.location.href = 'cart.html';
-        ">
-          ✨ Order Now
-        </button>
-
-        </div>
-
-
-
-        <!-- ❤️ WISHLIST -->
-        <button type="button" id="wish-button" data-id="do-good-work-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
-            <span id="heart-icon" style="font-size: 20px; color: inherit;">♡</span>
-            <span id="wish-text">Add to Wishlist</span>
-        </button>
-
-
-                <div class="description">
-                    <h4>Description:</h4>
-                    <p>This soft, comfortable tee carries a simple, heartfelt reminder — do good work. It's a gentle encouragement to take pride in what you create, stay consistent, and keep showing up, one day at a time.</p>
-                </div>
+                <button
+                    type="button"
+                    data-color="lavender"
+                    style="width: 30px; height: 30px; border-radius: 50%; background: #E3CEF7; border: 3px solid #ccc; cursor: pointer; padding: 0;"
+                    aria-label="Lavender">
+                </button>
             </div>
-        </section>
 
-      </main>
+            <!-- SIZE -->
+            <div class="size-options">
+                <button class="size-btn" data-size="S">S</button>
+                <button class="size-btn" data-size="M">M</button>
+                <button class="size-btn" data-size="L">L</button>
+                <button class="size-btn" data-size="XL">XL</button>
+            </div>
 
-      <footer class="site-footer d-flex align-items-center justify-content-between">
+            <!-- QUANTITY -->
+            <div class="quantity-wrapper">
+                <button class="quantity-btn qty-minus">−</button>
+                <span class="quantity-value">1</span>
+                <button class="quantity-btn qty-plus">+</button>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="action-buttons">
+                <button class="add-to-cart-btn" onclick="
+                    if (!selectedColor) { alert('Select a color first!'); return; }
+                    if (!selectedSize) { alert('Select a size first!'); return; }
+                    addToCart('do-good-work-tee', 'Do Good Work Tee', 499, selectedColor, selectedSize, 'pic-do-good-work-tee');
+                    alert('✅ Added to cart!');
+                ">
+                    🛒 Add to Cart
+                </button>
+
+                <button class="order-now-btn">✨ Order Now</button>
+            </div>
+
+            <!-- WISHLIST -->
+            <button
+                type="button"
+                id="wish-button"
+                data-id="do-good-work-tee"
+                style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
+
+                <svg id="heart-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+
+                Add to Wishlist
+            </button>
+
+            <!-- DESCRIPTION -->
+            <div class="description">
+                <h4>Description:</h4>
+                <p>
+                    This soft, comfortable tee carries a simple, heartfelt reminder — do good work.
+                    It's a gentle encouragement to take pride in what you create, stay consistent,
+                    and keep showing up, one day at a time.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="site-footer d-flex align-items-center justify-content-between">
         <span class="footer-logo" role="img" aria-label="by pxlpuff"></span>
         <div class="footer-links d-flex flex-column">
             <a href="privacy-policy.html" class="page-link">Privacy Policy</a>
             <span class="page-link">Copyright</span>
         </div>
     </footer>
+
     <script src="js/main.js"></script>
-    
-    <script>
-// ===== GLOBAL VARIABLES =====
-let selectedColor = null;
-let selectedSize = null;
-let quantity = 1;
-let currentImageSrc = 'images/do-good-work-white.jpg'; // default image
-
-document.addEventListener('DOMContentLoaded', function() {
-  
-  // ===== 1. COLOR BUTTONS — CHANGE IMAGE =====
-  const colorButtons = document.querySelectorAll('#color-picker button');
-  const mainImg = document.querySelector('#main-product-image img');
-
-  colorButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      // Reset all borders
-      colorButtons.forEach(b => b.style.border = '3px solid #ccc');
-      // Highlight selected
-      this.style.border = '3px solid #000';
-      // Save selection
-      selectedColor = this.getAttribute('data-color');
-      currentImageSrc = this.getAttribute('data-image');
-      // Change main image
-      if (mainImg) mainImg.src = currentImageSrc;
-    });
-  });
-
-  // ===== 2. SIZE BUTTONS =====
-  const sizeButtons = document.querySelectorAll('.size-btn');
-  sizeButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      sizeButtons.forEach(b => b.classList.remove('selected'));
-      this.classList.add('selected');
-      selectedSize = this.getAttribute('data-size');
-    });
-  });
-
-  // ===== 3. QUANTITY BUTTONS =====
-  const minusBtn = document.querySelector('.qty-minus');
-  const plusBtn = document.querySelector('.qty-plus');
-  const qtyValue = document.querySelector('.quantity-value');
-
-  if (minusBtn) {
-    minusBtn.addEventListener('click', function() {
-      if (quantity > 1) {
-        quantity--;
-        qtyValue.textContent = quantity;
-      }
-    });
-  }
-
-  if (plusBtn) {
-    plusBtn.addEventListener('click', function() {
-      quantity++;
-      qtyValue.textContent = quantity;
-    });
-  }
-
-  // ===== 4. WISHLIST TOGGLE =====
-  const wishBtn = document.getElementById('wish-button');
-  const heartSvg = document.getElementById('heart-svg');
-  let isWished = false;
-
-  if (wishBtn) {
-    wishBtn.addEventListener('click', function() {
-      isWished = !isWished;
-      heartSvg.setAttribute('fill', isWished ? '#800020' : 'none');
-      heartSvg.setAttribute('stroke', isWished ? '#800020' : 'currentColor');
-    });
-  }
-});
-
-// ===== 5. ADD TO CART — GLOBAL FUNCTION =====
-function addToCart(productId, name, price, color, size, imageClass) {
-  if (!color) { alert('⚠️ Select a color first!'); return; }
-  if (!size) { alert('⚠️ Select a size first!'); return; }
-
-  const cart = JSON.parse(localStorage.getItem('pxlpuff_cart') || '[]');
-  const uniqueKey = `${productId}-${color}-${size}`;
-  const existingIndex = cart.findIndex(item => item.key === uniqueKey);
-
-  if (existingIndex !== -1) {
-    cart[existingIndex].quantity += quantity;
-  } else {
-    cart.push({
-      key: uniqueKey,
-      name: name,
-      price: price,
-      color: color,
-      size: size,
-      quantity: quantity,
-      image: currentImageSrc // ✅ saves the currently displayed image
-    });
-  }
-
-  localStorage.setItem('pxlpuff_cart', JSON.stringify(cart));
-  
-  // Update cart counter
-  const counter = document.querySelector('.cart-counter');
-  if (counter) {
-    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-    counter.textContent = total;
-    counter.style.display = total > 0 ? 'flex' : 'none';
-  }
-
-  alert(`✅ Added to cart!\n\nItem: ${name}\nColor: ${color}\nSize: ${size}\nQty: ${quantity}`);
-}
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const wishBtn = document.getElementById('wish-button');
-  const heartIcon = document.getElementById('heart-icon');
-  const wishText = document.getElementById('wish-text');
-  const productId = wishBtn.getAttribute('data-id');
-  
-  // Load saved wishlist state
-  let wishlist = JSON.parse(localStorage.getItem('pxlpuff_wishlist') || '[]');
-  let isWished = wishlist.includes(productId);
-  
-  // Update display based on saved state
-  function updateWishlistUI() {
-    if (isWished) {
-      heartIcon.textContent = '♥';
-      heartIcon.style.color = '#800020';
-      wishText.textContent = 'In Wishlist';
-    } else {
-      heartIcon.textContent = '♡';
-      heartIcon.style.color = 'inherit';
-      wishText.textContent = 'Add to Wishlist';
-    }
-  }
-  
-  // Set initial state
-  updateWishlistUI();
-  
-  // Toggle on click
-  wishBtn.addEventListener('click', function() {
-    isWished = !isWished;
-    
-    if (isWished) {
-      // Add to wishlist
-      if (!wishlist.includes(productId)) {
-        wishlist.push(productId);
-      }
-    } else {
-      // Remove from wishlist
-      wishlist = wishlist.filter(id => id !== productId);
-    }
-    
-    // Save and update display
-    localStorage.setItem('pxlpuff_wishlist', JSON.stringify(wishlist));
-    updateWishlistUI();
-  });
-});
-</script>
-
- 
 </body>
 </html>
