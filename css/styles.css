@@ -307,7 +307,10 @@ svg {
 .product-image {
   width: 100%;
   height: calc(413 * var(--p));
-  background: var(--placeholder);
+  background-color: transparent;
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
 
 .product h3 {
@@ -394,7 +397,10 @@ svg {
 .shop-card .img-box {
   width: calc(306 * var(--p));
   height: calc(292 * var(--p));
-  background: var(--soft);
+  background-color: transparent;
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
 
 .shop-card h3 {
@@ -458,14 +464,20 @@ svg {
 
 .thumb {
   height: calc(109 * var(--p));
-  background: var(--soft);
+  background-color: transparent;
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
 
 .main-image {
   flex: 0 0 calc(300 * var(--p));
   height: calc(334 * var(--p));
   margin-left: calc(52 * var(--p));
-  background: var(--soft);
+  background-color: transparent;
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
 
 .info {
@@ -1127,3 +1139,23 @@ svg {
   .sparkle { display: none; }
   .chips { flex-wrap: wrap; }
 }
+
+/* ---------- Product photos (cropped from the Figma images) ---------- */
+.pic-cart-do-good-work-tee { background-image: url("../images/products/cart-do-good-work-tee.png"); }
+.pic-cart-dont-be-late-tee { background-image: url("../images/products/cart-dont-be-late-tee.png"); }
+.pic-cart-everyday-comfort-tee { background-image: url("../images/products/cart-everyday-comfort-tee.png"); }
+.pic-do-good-work-tee-main { background-image: url("../images/products/do-good-work-tee-main.png"); }
+.pic-do-good-work-tee-thumb-1 { background-image: url("../images/products/do-good-work-tee-thumb-1.png"); }
+.pic-do-good-work-tee-thumb-2 { background-image: url("../images/products/do-good-work-tee-thumb-2.png"); }
+.pic-dont-be-late-tee-main { background-image: url("../images/products/dont-be-late-tee-main.png"); }
+.pic-dont-be-late-tee-thumb-1 { background-image: url("../images/products/dont-be-late-tee-thumb-1.png"); }
+.pic-dont-be-late-tee-thumb-2 { background-image: url("../images/products/dont-be-late-tee-thumb-2.png"); }
+.pic-everyday-comfort-tee-main { background-image: url("../images/products/everyday-comfort-tee-main.png"); }
+.pic-everyday-comfort-tee-thumb-1 { background-image: url("../images/products/everyday-comfort-tee-thumb-1.png"); }
+.pic-everyday-comfort-tee-thumb-2 { background-image: url("../images/products/everyday-comfort-tee-thumb-2.png"); }
+.pic-home-do-good-work-tee { background-image: url("../images/products/home-do-good-work-tee.png"); }
+.pic-home-dont-be-late-tee { background-image: url("../images/products/home-dont-be-late-tee.png"); }
+.pic-home-everyday-comfort-tee { background-image: url("../images/products/home-everyday-comfort-tee.png"); }
+.pic-shop-do-good-work-tee { background-image: url("../images/products/shop-do-good-work-tee.png"); }
+.pic-shop-dont-be-late-tee { background-image: url("../images/products/shop-dont-be-late-tee.png"); }
+.pic-shop-everyday-comfort-tee { background-image: url("../images/products/shop-everyday-comfort-tee.png"); }
