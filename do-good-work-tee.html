@@ -64,14 +64,14 @@
       type="button" 
       data-color="peach-cream"
       data-image="images/products/do-good-work-tee-main.jpg"
-      style="width: 26px; height: 26px; border-radius: 50%; background: #FCEEE0; border: 3px solid #cccccc; cursor: pointer; padding: 0;"
+      style="width: 26px; height: 26px; border-radius: 50%; background: #F8F8F8; border: 3px solid #000; cursor: pointer; padding: 0;"
     ></button>
 
     <button 
       type="button" 
       data-color="lavander"
       data-image="images/do-good-work-lavander.jpg"
-      style="width: 26px; height: 26px; border-radius: 50%; background: #add8e6; border: 3px solid #E3CEF7; cursor: pointer; padding: 0;"
+      style="width: 26px; height: 26px; border-radius: 50%; background: #BFD7EA; border: 3px solid #ccc; cursor: pointer; padding: 0;"
     ></button>
 
   </div>
@@ -79,6 +79,7 @@
 
 
                 <!-- SIZE -->
+        <p style="margin: 16px 0 8px;"><strong>SIZE:</strong></p>
         <div class="size-options">
           <button class="size-btn" data-size="S">S</button>
           <button class="size-btn" data-size="M">M</button>
@@ -95,26 +96,33 @@
 
         <!-- BUTTONS -->
         <div class="action-buttons">
-            <button class="add-to-cart-btn" onclick="
-                if (!selectedColor) { alert('Select a color first!'); return; }
-                if (!selectedSize) { alert('Select a size first!'); return; }
-                addToCart('do-good-work-tee', 'Do Good Work Tee', 499, selectedColor, selectedSize, 'pic-do-good-work-tee');
-                alert('✅ Added to cart!');
-                ">
-                🛒 Add to Cart
-            </button>
+          <button class="add-to-cart-btn" onclick="
+            if (!selectedColor) { alert('Select a color first!'); return; }
+            if (!selectedSize) { alert('Select a size first!'); return; }
+            addToCart('do-good-work-tee', 'Do Good Work Tee', 499, selectedColor, selectedSize, currentImageSrc);
+            alert('✅ Added to cart!');
+          ">
+            🛒 Add to Cart
+          </button>
 
-            <button class="order-now-btn">✨ Order Now</button>
+          <button class="order-now-btn" onclick="
+            if (!selectedColor) { alert('Select a color first!'); return; }
+            if (!selectedSize) { alert('Select a size first!'); return; }
+            addToCart('do-good-work-tee', 'Do Good Work Tee', 499, selectedColor, selectedSize, currentImageSrc);
+            window.location.href = 'cart.html';
+          ">
+            ✨ Order Now
+          </button>
         </div>
+
 
 
         <!-- ❤️ WISHLIST -->
         <button type="button" id="wish-button" data-id="do-good-work-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
-            <svg id="heart-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-            Add to Wishlist
+            <span id="heart-icon" style="font-size: 20px; color: inherit;">♡</span>
+            <span id="wish-text">Add to Wishlist</span>
         </button>
+
 
                 <div class="description">
                     <h4>Description:</h4>
@@ -133,5 +141,164 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
+    
+    <script>
+// ===== GLOBAL VARIABLES =====
+let selectedColor = null;
+let selectedSize = null;
+let quantity = 1;
+let currentImageSrc = 'images/do-good-work-white.jpg'; // default image
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ===== 1. COLOR BUTTONS — CHANGE IMAGE =====
+  const colorButtons = document.querySelectorAll('#color-picker button');
+  const mainImg = document.querySelector('#main-product-image img');
+
+  colorButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Reset all borders
+      colorButtons.forEach(b => b.style.border = '3px solid #ccc');
+      // Highlight selected
+      this.style.border = '3px solid #000';
+      // Save selection
+      selectedColor = this.getAttribute('data-color');
+      currentImageSrc = this.getAttribute('data-image');
+      // Change main image
+      if (mainImg) mainImg.src = currentImageSrc;
+    });
+  });
+
+  // ===== 2. SIZE BUTTONS =====
+  const sizeButtons = document.querySelectorAll('.size-btn');
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      sizeButtons.forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedSize = this.getAttribute('data-size');
+    });
+  });
+
+  // ===== 3. QUANTITY BUTTONS =====
+  const minusBtn = document.querySelector('.qty-minus');
+  const plusBtn = document.querySelector('.qty-plus');
+  const qtyValue = document.querySelector('.quantity-value');
+
+  if (minusBtn) {
+    minusBtn.addEventListener('click', function() {
+      if (quantity > 1) {
+        quantity--;
+        qtyValue.textContent = quantity;
+      }
+    });
+  }
+
+  if (plusBtn) {
+    plusBtn.addEventListener('click', function() {
+      quantity++;
+      qtyValue.textContent = quantity;
+    });
+  }
+
+  // ===== 4. WISHLIST TOGGLE =====
+  const wishBtn = document.getElementById('wish-button');
+  const heartSvg = document.getElementById('heart-svg');
+  let isWished = false;
+
+  if (wishBtn) {
+    wishBtn.addEventListener('click', function() {
+      isWished = !isWished;
+      heartSvg.setAttribute('fill', isWished ? '#800020' : 'none');
+      heartSvg.setAttribute('stroke', isWished ? '#800020' : 'currentColor');
+    });
+  }
+});
+
+// ===== 5. ADD TO CART — GLOBAL FUNCTION =====
+function addToCart(productId, name, price, color, size, imageClass) {
+  if (!color) { alert('⚠️ Select a color first!'); return; }
+  if (!size) { alert('⚠️ Select a size first!'); return; }
+
+  const cart = JSON.parse(localStorage.getItem('pxlpuff_cart') || '[]');
+  const uniqueKey = `${productId}-${color}-${size}`;
+  const existingIndex = cart.findIndex(item => item.key === uniqueKey);
+
+  if (existingIndex !== -1) {
+    cart[existingIndex].quantity += quantity;
+  } else {
+    cart.push({
+      key: uniqueKey,
+      name: name,
+      price: price,
+      color: color,
+      size: size,
+      quantity: quantity,
+      image: currentImageSrc // ✅ saves the currently displayed image
+    });
+  }
+
+  localStorage.setItem('pxlpuff_cart', JSON.stringify(cart));
+  
+  // Update cart counter
+  const counter = document.querySelector('.cart-counter');
+  if (counter) {
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    counter.textContent = total;
+    counter.style.display = total > 0 ? 'flex' : 'none';
+  }
+
+  alert(`✅ Added to cart!\n\nItem: ${name}\nColor: ${color}\nSize: ${size}\nQty: ${quantity}`);
+}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const wishBtn = document.getElementById('wish-button');
+  const heartIcon = document.getElementById('heart-icon');
+  const wishText = document.getElementById('wish-text');
+  const productId = wishBtn.getAttribute('data-id');
+  
+  // Load saved wishlist state
+  let wishlist = JSON.parse(localStorage.getItem('pxlpuff_wishlist') || '[]');
+  let isWished = wishlist.includes(productId);
+  
+  // Update display based on saved state
+  function updateWishlistUI() {
+    if (isWished) {
+      heartIcon.textContent = '♥';
+      heartIcon.style.color = '#800020';
+      wishText.textContent = 'In Wishlist';
+    } else {
+      heartIcon.textContent = '♡';
+      heartIcon.style.color = 'inherit';
+      wishText.textContent = 'Add to Wishlist';
+    }
+  }
+  
+  // Set initial state
+  updateWishlistUI();
+  
+  // Toggle on click
+  wishBtn.addEventListener('click', function() {
+    isWished = !isWished;
+    
+    if (isWished) {
+      // Add to wishlist
+      if (!wishlist.includes(productId)) {
+        wishlist.push(productId);
+      }
+    } else {
+      // Remove from wishlist
+      wishlist = wishlist.filter(id => id !== productId);
+    }
+    
+    // Save and update display
+    localStorage.setItem('pxlpuff_wishlist', JSON.stringify(wishlist));
+    updateWishlistUI();
+  });
+});
+</script>
+
+ 
 </body>
 </html>
