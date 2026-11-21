@@ -1,188 +1,115 @@
 // ==============================================
-// FINAL VERSION — Counter + Cart Page Match
+// PXLPUFF CART — COMPLETE & WORKING
 // ==============================================
 
-// ===== GLOBAL DATA =====
-let cart = [];
-let selectedColor = null;
-let selectedSize = null;
-let selectedQty = 1;
-
-// ===== LOAD CART FROM STORAGE =====
-function loadCart() {
+// ===== GET CART FROM STORAGE =====
+function getCart() {
   const saved = localStorage.getItem('pxlpuff_cart');
-  if (saved) {
-    cart = JSON.parse(saved);
-  } else {
-    cart = [];
-  }
+  return saved ? JSON.parse(saved) : [];
 }
 
-// ===== SAVE CART =====
-function saveCart() {
+// ===== SAVE CART TO STORAGE =====
+function saveCart(cart) {
   localStorage.setItem('pxlpuff_cart', JSON.stringify(cart));
+  updateCartIcon();
+  renderCart();
 }
 
-// ===== UPDATE CART COUNTER =====
-function updateCartCounter() {
+// ===== UPDATE CART ICON NUMBER =====
+function updateCartIcon() {
+  const cart = getCart();
   const counter = document.querySelector('.cart-counter');
   if (!counter) return;
-  let total = 0;
-  for (let i = 0; i < cart.length; i++) {
-    total += cart[i].quantity;
-  }
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
   counter.textContent = total;
-  counter.style.display = total > 0 ? 'block' : 'none';
+  counter.style.display = total > 0 ? 'flex' : 'none';
 }
 
-// ===== ADD TO CART =====
-function addToCart(productId, productName, price, color, size, imageClass) {
-  loadCart(); // Load latest first
-  
-  let found = false;
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].id === productId && cart[i].color === color && cart[i].size === size) {
-      cart[i].quantity += selectedQty;
-      found = true;
-      break;
-    }
-  }
-  
-  if (!found) {
-    cart.push({
-      id: productId,
-      name: productName,
-      price: price,
-      color: color,
-      size: size,
-      quantity: selectedQty,
-      imageClass: imageClass
-    });
-  }
-  
-  saveCart();
-  updateCartCounter();
-  alert('✅ Added to cart!');
-}
-
-// ===== UPDATE QUANTITY =====
-function updateQuantity(index, change) {
-  loadCart();
-  cart[index].quantity += change;
+// ===== CHANGE QUANTITY =====
+window.changeQuantity = function(index, amount) {
+  const cart = getCart();
+  cart[index].quantity += amount;
   if (cart[index].quantity < 1) cart[index].quantity = 1;
-  saveCart();
-  updateCartCounter();
-  renderCartPage();
-}
+  saveCart(cart);
+};
 
 // ===== REMOVE ITEM =====
-function removeItem(index) {
-  loadCart();
+window.removeItem = function(index) {
+  const cart = getCart();
   cart.splice(index, 1);
-  saveCart();
-  updateCartCounter();
-  renderCartPage();
-}
+  saveCart(cart);
+};
 
-// ===== RENDER CART PAGE — THE KEY FUNCTION =====
-function renderCartPage() {
-  // Only run if on cart page
-  const emptyDiv = document.getElementById('empty-cart');
-  const itemsDiv = document.getElementById('cart-items');
-  const summaryDiv = document.getElementById('cart-summary');
-  
-  if (!emptyDiv) return; // Not on cart page — exit
+// ===== RENDER CART — THIS SHOWS EVERYTHING! =====
+function renderCart() {
+  const cart = getCart();
+  const emptyMsg = document.getElementById('empty-cart');
+  const itemsContainer = document.getElementById('cart-items');
+  const summary = document.getElementById('cart-summary');
+  const subtotalEl = document.getElementById('subtotal-price');
+  const totalEl = document.getElementById('total-price');
 
-  loadCart(); // ← CRITICAL: Always load fresh data first!
+  if (!emptyMsg) return; // Not on cart page
 
   // 🛒 CART IS EMPTY
   if (cart.length === 0) {
-    emptyDiv.classList.remove('d-none');
-    if (itemsDiv) itemsDiv.classList.add('d-none');
-    if (summaryDiv) summaryDiv.classList.add('d-none');
+    emptyMsg.style.display = 'block';
+    if (itemsContainer) itemsContainer.classList.add('d-none');
+    if (summary) summary.classList.add('d-none');
     return;
   }
 
   // 📦 CART HAS ITEMS
-  emptyDiv.classList.add('d-none');
-  itemsDiv.classList.remove('d-none');
-  summaryDiv.classList.remove('d-none');
+  emptyMsg.style.display = 'none';
+  if (itemsContainer) itemsContainer.classList.remove('d-none');
+  if (summary) summary.classList.remove('d-none');
   
-  itemsDiv.innerHTML = '';
+  itemsContainer.innerHTML = '';
   let totalPrice = 0;
 
-  for (let i = 0; i < cart.length; i++) {
-    const item = cart[i];
+  cart.forEach((item, i) => {
     totalPrice += item.price * item.quantity;
 
-    const itemCard = document.createElement('div');
-    itemCard.className = 'col-12 mb-3';
-    itemCard.innerHTML = `
-      <div class="d-flex border rounded p-3 align-items-center">
-        <div style="width:80px;height:100px;background:#eee;margin-right:15px;flex-shrink:0;"></div>
-        <div class="flex-grow-1">
-          <h5 class="mb-1">${item.name}</h5>
-          <p class="mb-1 text-muted small">Color: ${item.color} | Size: ${item.size}</p>
-          <p class="fw-bold mb-0">₱ ${item.price}</p>
-        </div>
-        <div class="d-flex align-items-center mx-3">
-            <button onclick="updateQuantity(${i}, -1)" class="btn btn-sm" style="border-color: #800020; color: #800020;">−</button>
-            <span class="mx-2">${item.quantity}</span>
-            <button onclick="updateQuantity(${i}, 1)" class="btn btn-sm" style="border-color: #800020; color: #800020;">+</button>
-
- 
-        </div>
-        <div class="text-end" style="min-width:100px;">
-          <p class="fw-bold mb-1">₱ ${item.price * item.quantity}</p>
-          <button onclick="removeItem(${i})" class="btn btn-link btn-sm p-0" style="color: #800020;">Remove</button>
+    itemsContainer.innerHTML += `
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="card-body d-flex align-items-center">
+            <!-- ✅ PRODUCT IMAGE -->
+            <img 
+              src="${item.image}" 
+              alt="${item.name}" 
+              style="width: 80px; height: 100px; object-fit: cover; border-radius: 4px; margin-right: 15px; background: #f5f5f5;"
+              onerror="this.src='images/placeholder.png';"
+            >
+            
+            <div class="flex-grow-1">
+              <h5 class="mb-1">${item.name}</h5>
+              <p class="text-muted small mb-0">Color: ${item.color} | Size: ${item.size}</p>
+              <p class="fw-bold mt-1 mb-0">₱ ${item.price}</p>
+            </div>
+            
+            <div class="d-flex align-items-center mx-3">
+              <button onclick="changeQuantity(${i}, -1)" class="btn btn-sm" style="border-color: #800020; color: #800020;">−</button>
+              <span class="mx-3">${item.quantity}</span>
+              <button onclick="changeQuantity(${i}, 1)" class="btn btn-sm" style="border-color: #800020; color: #800020;">+</button>
+            </div>
+            
+            <div class="text-end" style="min-width: 110px;">
+              <p class="fw-bold mb-1">₱ ${item.price * item.quantity}</p>
+              <button onclick="removeItem(${i})" class="btn btn-link text-decoration-none p-0" style="color: #800020;">Remove</button>
+            </div>
+          </div>
         </div>
       </div>
     `;
-    itemsDiv.appendChild(itemCard);
-  }
-
-  document.getElementById('subtotal-price').textContent = '₱ ' + totalPrice;
-  document.getElementById('total-price').textContent = '₱ ' + totalPrice;
-}
-
-// ===== PRODUCT PAGE SETUP =====
-function initProductPage() {
-  selectedColor = null;
-  selectedSize = null;
-  selectedQty = 1;
-
-  const colorButtons = document.querySelectorAll('#color-picker button');
-  colorButtons.forEach(btn => {
-    btn.onclick = function() {
-      colorButtons.forEach(b => b.style.border = '3px solid #ccc');
-      this.style.border = '3px solid #000';
-      selectedColor = this.getAttribute('data-color');
-    };
   });
 
-  const sizeButtons = document.querySelectorAll('.size-btn');
-  sizeButtons.forEach(btn => {
-    btn.onclick = function() {
-      sizeButtons.forEach(b => b.style.border = '2px solid #ccc');
-      this.style.border = '2px solid #000';
-      selectedSize = this.getAttribute('data-size');
-    };
-  });
-
-  const minus = document.querySelector('.qty-minus');
-  const plus = document.querySelector('.qty-plus');
-  const qtyDisplay = document.querySelector('.quantity-value');
-  if (minus) minus.onclick = () => {
-    if (selectedQty > 1) { selectedQty--; qtyDisplay.textContent = selectedQty; }
-  };
-  if (plus) plus.onclick = () => { selectedQty++; qtyDisplay.textContent = selectedQty; };
+  if (subtotalEl) subtotalEl.textContent = '₱ ' + totalPrice;
+  if (totalEl) totalEl.textContent = '₱ ' + totalPrice;
 }
 
-// ===== START =====
+// ===== RUN WHEN PAGE LOADS =====
 document.addEventListener('DOMContentLoaded', function() {
-  loadCart();        // ← Load saved cart FIRST
-  updateCartCounter(); // ← Then update counter
-  initProductPage();
-  renderCartPage();  // ← Then build the cart display
+  updateCartIcon();
+  renderCart(); // ✅ Builds your cart page automatically!
 });
-
