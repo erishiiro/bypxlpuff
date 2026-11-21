@@ -53,7 +53,7 @@
       <p>Get a little pixel magic straight to your inbox.</p>
     </section>
 
-    <form class="subscribe" action="#" method="post">
+      <form class="subscribe" id="subscribeForm">
       <input class="form-control" type="email" name="email" placeholder="Enter your email address" aria-label="Email address">
       <button type="submit" class="btn btn-figma blue">Subscribe</button>
     </form>
@@ -141,7 +141,10 @@
   </footer>
 
 <script>
-  // Contact form JavaScript Method #2
+  // ======================================
+  // CONTACT FORM - METHOD #2
+  // ======================================
+
   const TO_ADDRESS = "hello@examplewebsite142.com";
 
   document.getElementById("contactForm").addEventListener("submit", function(e) {
@@ -164,8 +167,43 @@
       "?subject=" + encodeURIComponent(subject) +
       "&body=" + encodeURIComponent(body);
 
-    window.open(mailto, "_self");
+    window.location.href = mailto;
   });
+
+
+  // ======================================
+  // NEWSLETTER SUBSCRIPTION
+  // ======================================
+
+  document.getElementById("subscribeForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const emailInput = this.querySelector('input[name="email"]');
+    const email = emailInput.value.trim();
+
+    if (!emailInput.checkValidity() || email === "") {
+      alert("Please enter a valid email address.");
+      emailInput.focus();
+      return;
+    }
+
+    const recipient = "hello@examplewebsite142.com";
+    const subject = "Pixel Club Newsletter Subscription";
+
+    const body =
+      "Hello by pxlpuff!\r\n\r\n" +
+      "I would like to subscribe to the Pixel Club newsletter.\r\n\r\n" +
+      "My email address: " + email;
+
+    const mailto = "mailto:" + recipient +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+
+    window.location.href = mailto;
+  });
+
 </script>
+
+<script src="js/main.js"></script>
 </body>
 </html>
