@@ -1387,6 +1387,21 @@ button.color-btn {
 }
 
 .size-btn {
+  display: inline-block;
+  border: 1px solid #ddd; 
+  text-decoration: none;
+  color: #000;
+  box-sizing: border-box; 
+}
+
+/* Active/selected button */
+.size-btn.active {
+  background-color: #e0e0e0;
+  border: 1px solid #666; 
+}
+
+
+.size-btn {
   border: 1px solid #ddd;
   background: #fff;
   padding: 8px 16px;
@@ -1590,23 +1605,6 @@ button.color-btn {
   font-weight: 500;
 }
 
-.size-dropdown {
-  padding: 6px 12px;
-  border: 1px solid var(--burgundy);
-  border-radius: 4px;
-  background: #fff;
-  color: var(--burgundy);
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.size-dropdown:focus {
-  outline: none;
-  border-color: var(--burgundy);
-  box-shadow: 0 0 0 2px rgba(168, 50, 80, 0.2);
-}
-
 /* Quantity */
 .quantity-wrapper {
   display: flex;
@@ -1748,6 +1746,7 @@ button.color-btn {
   margin: 4px 0;
   flex-wrap: wrap;
 }
+
 
 .size-btn {
   min-width: 44px;
@@ -2135,3 +2134,4 @@ button.color-btn {
 .btn-burgundy-link:hover {
   color: #5c0017;
 }
+
