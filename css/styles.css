@@ -188,7 +188,11 @@ svg {
 .page-wishlist main,
 .page-login main,
 .page-register main,
-.page-search main {
+.page-search main,
+.page-menu main,
+.page-popular main,
+.page-all-shirts main,
+.page-new-arrivals main {
   min-height: calc(715 * var(--p));
 }
 
@@ -280,6 +284,19 @@ svg {
   --bs-btn-active-bg: #7D98AB;
   --bs-btn-active-border-color: #7D98AB;
   --bs-btn-focus-shadow-rgb: 143, 169, 189;
+}
+
+.btn-figma.sage {
+  --bs-btn-color: #000;
+  --bs-btn-bg: var(--sage);
+  --bs-btn-border-color: var(--sage);
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #97A78B;
+  --bs-btn-hover-border-color: #97A78B;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #97A78B;
+  --bs-btn-active-border-color: #97A78B;
+  --bs-btn-focus-shadow-rgb: 168, 184, 154;
 }
 
 .hero-image {
@@ -2134,6 +2151,117 @@ button.color-btn {
 }
 .btn-burgundy-link:hover {
   color: #5c0017;
+}
+
+.menu-stage {
+  padding: calc(78 * var(--p)) 0 calc(80 * var(--p)) calc(var(--pad) + 58 * var(--p));
+}
+
+.menu-stage h1 {
+  width: calc(779 * var(--p));
+  max-width: 100%;
+  font-size: calc(65 * var(--p));
+  line-height: calc(87 * var(--p));
+  color: var(--burgundy);
+}
+
+.menu-body {
+  align-items: flex-start;
+  gap: calc(155 * var(--p));
+  margin-top: calc(89 * var(--p));
+  margin-left: calc(41 * var(--p));
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  width: calc(338 * var(--p));
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(85 * var(--p));
+  padding: 0 calc(30 * var(--p)) 0 calc(38 * var(--p));
+  border-bottom: calc(1 * var(--p)) solid #000;
+  font-size: calc(20 * var(--p));
+  line-height: calc(31 * var(--p));
+}
+
+.menu-links svg {
+  width: calc(20 * var(--p));
+  height: calc(20 * var(--p));
+  flex-shrink: 0;
+}
+
+.menu-promo {
+  margin-top: calc(34 * var(--p));
+}
+
+.menu-promo p {
+  font-size: calc(20 * var(--p));
+  line-height: calc(31 * var(--p));
+}
+
+.menu-auth {
+  gap: calc(33 * var(--p));
+  margin-top: calc(59 * var(--p));
+}
+
+.btn-menu-auth {
+  display: block;
+  width: calc(212 * var(--p));
+  height: calc(50 * var(--p));
+  border-radius: calc(7 * var(--p));
+  font-size: calc(20 * var(--p));
+  font-weight: 400;
+  line-height: calc(50 * var(--p));
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .menu-stage { padding: calc(40 * var(--p)) calc(24 * var(--p)); }
+  .menu-stage h1 { width: auto; font-size: calc(42 * var(--p)); line-height: calc(56 * var(--p)); }
+  .menu-body {
+    flex-direction: column;
+    gap: calc(40 * var(--p));
+    margin: calc(32 * var(--p)) 0 0;
+  }
+  .menu-links { width: 100%; max-width: calc(400 * var(--p)); }
+  .menu-promo { margin-top: 0; }
+  .menu-auth { flex-wrap: wrap; margin-top: calc(24 * var(--p)); }
+  .btn-menu-auth { width: calc(160 * var(--p)); }
+}
+
+.category-heading {
+  margin: calc(56 * var(--p)) 0 0;
+  text-align: center;
+  color: var(--burgundy);
+  font-size: calc(48 * var(--p));
+  line-height: calc(64 * var(--p));
+}
+
+.page-popular .shop-grid,
+.page-all-shirts .shop-grid,
+.page-new-arrivals .shop-grid {
+  margin-top: calc(36 * var(--p));
+}
+
+.shop-card .price-line {
+  display: flex;
+  align-items: center;
+  gap: calc(10 * var(--p));
+  margin-top: calc(10 * var(--p));
+  font-size: calc(36 * var(--p));
+  font-weight: 700;
+  line-height: calc(40 * var(--p));
+}
+
+.shop-card .price-line svg {
+  width: calc(22 * var(--p));
+  height: calc(22 * var(--p));
+  color: var(--mid-grey);
 }
 
 .hamburger-menu {
