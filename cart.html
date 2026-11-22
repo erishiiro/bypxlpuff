@@ -95,7 +95,47 @@
           <span>Total</span>
           <span id="total-price">₱ 0</span>
         </div>
-        <button class="btn w-100" style="background-color: #800020; border-color: #800020; color: #fff;">Proceed to Checkout</button>
+        <button class="btn w-100" style="background-color: #800020; border-color: #800020; color: #fff;" onclick="
+  const cart = JSON.parse(localStorage.getItem('pxlpuff_cart') || '[]');
+  
+  if (cart.length === 0) {
+    alert('⚠️ Your cart is empty! Add some items first.');
+    return false;
+  }
+
+  const LINE = '%0D%0A';
+  let emailBody = 'Hello by pxlpuff Team,' + LINE + LINE;
+  emailBody += 'I would like to place the following order:' + LINE;
+  emailBody += '----------------------------------------' + LINE + LINE;
+  
+  let grandTotal = 0;
+  
+  cart.forEach((item, index) => {
+    const itemTotal = item.price * item.quantity;
+    grandTotal += itemTotal;
+    emailBody += 'Item ' + (index + 1) + ': ' + item.name + LINE;
+    emailBody += 'Color: ' + item.color + LINE;
+    emailBody += 'Size: ' + item.size + LINE;
+    emailBody += 'Quantity: ' + item.quantity + ' × ₱' + item.price + ' = ₱' + itemTotal + LINE;
+    emailBody += LINE;
+  });
+  
+  emailBody += '----------------------------------------' + LINE;
+  emailBody += 'GRAND TOTAL: ₱' + grandTotal + LINE + LINE;
+  emailBody += 'Please let me know the next steps for payment and delivery.' + LINE + LINE;
+  emailBody += 'Thank you!' + LINE + LINE;
+  emailBody += 'Your Name:' + LINE;
+  emailBody += 'Contact Number: ' + LINE;
+  emailBody += 'Delivery Address: ' + LINE;
+
+  const subject = encodeURIComponent('New Order — Cart Checkout');
+  window.open('https://mail.google.com/mail/?view=cm&to=orders@examplewebsite142.com&su=' + subject + '&body=' + emailBody, '_blank');
+  return false;
+">
+  Proceed to Checkout
+</button>
+
+
       </div>
     </div>
   </div>
