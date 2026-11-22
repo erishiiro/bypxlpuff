@@ -104,7 +104,7 @@ svg {
 .header-icons {
   display: flex;
   align-items: center;
-  gap: calc(28 * var(--p));
+  gap: calc(16 * var(--p));
   margin-right: calc(29 * var(--p));
 }
 
@@ -114,10 +114,6 @@ svg {
   justify-content: center;
   width: calc(40 * var(--p));
   height: calc(40 * var(--p));
-}
-
-.header-icons a:nth-child(2) {
-  margin-right: calc(19 * var(--p));
 }
 
 .header-icons svg {
@@ -536,6 +532,93 @@ svg {
   font-size: calc(30 * var(--p));
   font-weight: 700;
   line-height: calc(39 * var(--p));
+}
+
+.info .sale-prices {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: calc(5 * var(--p));
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(30 * var(--p));
+  font-weight: 700;
+  line-height: calc(39 * var(--p));
+}
+
+.info .original-price {
+  color: var(--mid-grey, #9a9a9a);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.info .sale-price {
+  color: var(--burgundy);
+}
+
+.info .discount-label {
+  margin: 4px 0 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(22 * var(--p));
+  font-weight: 600;
+  color: var(--burgundy);
+}
+
+.product .sale-prices {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.product .original-price {
+  color: var(--mid-grey, #9a9a9a);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.product .sale-price {
+  color: var(--burgundy);
+}
+
+.product .discount-label {
+  margin: 4px 0 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--burgundy);
+}
+
+.wishlist-item .sale-prices {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 1rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.wishlist-item .original-price {
+  color: var(--mid-grey, #9a9a9a);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.wishlist-item .sale-price {
+  color: var(--burgundy);
+}
+
+.wishlist-item .discount-label {
+  padding: 0 1rem 1rem;
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--burgundy);
 }
 
 .meta {
@@ -1538,7 +1621,6 @@ button.color-btn {
   pointer-events: auto;
 }
 
-```
 .size-btn {
   border: 1px solid #800020;
   background: #fff;
@@ -1620,7 +1702,6 @@ button.color-btn {
 }
 
 
-```
 .size-select-wrapper {
   display: flex;
   align-items: center;
@@ -1935,7 +2016,6 @@ button.color-btn {
   opacity: 0.9;
 } 
 
-```
 .cart-list {
   gap: 32px;
   padding: 20px 0 40px;

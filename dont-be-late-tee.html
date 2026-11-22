@@ -64,7 +64,13 @@
 
     <div class="info">
       <h1>Don't Be Late Tee</h1>
-      <p class="price">₱ 499</p>
+      <div id="product-price">
+        <p class="price sale-prices">
+          <span class="original-price">₱ 499</span>
+          <span class="sale-price">₱ 474.05</span>
+        </p>
+        <p class="discount-label">5% Off</p>
+      </div>
       <p class="meta brand d-flex align-items-center"><strong>BRAND:</strong><span>by pxlpuff</span></p>
 
       <!-- COLOR SELECTION -->
@@ -74,6 +80,8 @@
           type="button"
           class="selected"
           data-color="Rose"
+          data-price="474.05"
+          data-discount="5% Off"
           data-image="images/products/dont-be-late-tee-main.png"
           data-thumb-1="images/products/dont-be-late-tee-thumb-1.png"
           data-thumb-2="images/products/dont-be-late-tee-thumb-2.png"
@@ -82,6 +90,7 @@
         <button
           type="button"
           data-color="Sage"
+          data-price="499"
           data-image="images/products/dont-be-late-tee-thumb-1-sage.png"
           data-thumb-1="images/products/dont-be-late-tee-thumb-1-sage.png"
           data-thumb-2="images/products/dont-be-late-tee-thumb-2-sage.png"
@@ -90,6 +99,7 @@
         <button
           type="button"
           data-color="Blue"
+          data-price="499"
           data-image="images/products/cart-dont-be-late-tee-main-blue.png"
           data-thumb-1="images/products/cart-dont-be-late-tee-main-blue.png"
           data-thumb-2="images/products/dont-be-late-tee-thumb-2-blue.png"
@@ -114,16 +124,11 @@
       </div>
 
       <!-- BUTTONS -->
-   <button class="add-to-cart-btn" onclick="
-  if (!selectedColor) { alert('Select a color first!'); return; }
-  if (!selectedSize) { alert('Select a size first!'); return; }
-  addToCart('dont-be-late-tee', 'Don\'t Be Late Tee', 499, selectedColor, selectedSize, currentImageSrc);
-  alert('✅ Added to cart!');
-">
+<button class="add-to-cart-btn" type="button" onclick="addToCart('dont-be-late-tee', 'Don\'t Be Late Tee', productPrice, selectedColor, selectedSize, currentImageSrc)">
   🛒 Add to Cart
 </button>
 
-<button class="order-now-btn" type="button">
+<button class="order-now-btn" type="button" onclick="orderNow()">
   ✨ Order Now
 </button>
 
@@ -176,6 +181,7 @@
 var selectedColor = 'Rose';
 var selectedSize = 'S';
 var quantity = 1;
+var productPrice = 474.05;
 var currentImageSrc = 'images/products/dont-be-late-tee-main.png';
 
 document.addEventListener('DOMContentLoaded', function() {

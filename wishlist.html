@@ -176,19 +176,25 @@ document.addEventListener('DOMContentLoaded', function() {
   const products = {
     'dont-be-late-tee': {
       name: "Don't Be Late Tee",
-      price: "₱499",
+      price: "₱ 474.05",
+      originalPrice: "₱ 499",
+      discount: "5% Off",
       image: "images/products/dont-be-late-tee-main.png",
       link: "dont-be-late-tee.html"
     },
     'everyday-comfort-tee': {
       name: "Everyday Comfort Tee",
-      price: "₱499",
+      price: "₱ 424.15",
+      originalPrice: "₱ 499",
+      discount: "15% Off",
       image: "images/products/everyday-comfort-tee-thumb-1.png",
       link: "everyday-comfort-tee.html"
     },
     'do-good-work-tee': {
       name: "Do Good Work Tee",
-      price: "₱499",
+      price: "₱ 489.02",
+      originalPrice: "₱ 499",
+      discount: "2% Off",
       image: "images/products/do-good-work-tee-main.png",
       link: "do-good-work-tee.html"
     }
@@ -242,7 +248,11 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="${p.link}" class="wishlist-item-link">
           <img src="${p.image}" alt="${p.name}" class="wishlist-item-img">
           <h3>${p.name}</h3>
-          <p class="price">${p.price}</p>
+          <p class="sale-prices">
+            <span class="original-price">${p.originalPrice || ''}</span>
+            <span class="sale-price">${p.price}</span>
+          </p>
+          <p class="discount-label">${p.discount || ''}</p>
         </a>
         <button class="remove-wishlist-btn" data-id="${id}" aria-label="Remove from wishlist">✕</button>
       `;

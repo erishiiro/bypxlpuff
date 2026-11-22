@@ -64,7 +64,13 @@
 
     <div class="info">
       <h1>Everyday Comfort Tee</h1>
-      <p class="price">₱ 499</p>
+      <div id="product-price">
+        <p class="price sale-prices">
+          <span class="original-price">₱ 499</span>
+          <span class="sale-price">₱ 424.15</span>
+        </p>
+        <p class="discount-label">15% Off</p>
+      </div>
       <p class="meta brand d-flex align-items-center"><strong>BRAND:</strong><span>by pxlpuff</span></p>
 
       <!-- COLOR SELECTION -->
@@ -74,6 +80,8 @@
           type="button"
           class="selected"
           data-color="Light Gray"
+          data-price="424.15"
+          data-discount="15% Off"
           data-image="images/products/everyday-comfort-tee-main.png"
           data-thumb-1="images/products/everyday-comfort-tee-thumb-1.png"
           data-thumb-2="images/products/everyday-comfort-tee-thumb-2.png"
@@ -82,6 +90,7 @@
         <button
           type="button"
           data-color="Sage"
+          data-price="499"
           data-image="images/products/shop-everyday-comfort-tee-sage.png"
           data-thumb-1="images/products/everyday-comfort-tee-thumb-1-sage.png"
           data-thumb-2="images/products/everyday-comfort-tee-thumb-2-sage.png"
@@ -107,20 +116,12 @@
 
       <!-- BUTTONS -->
       <div class="action-buttons">
-        <button class="add-to-cart-btn" onclick="
-          if (!selectedColor) { alert('Select a color first!'); return; }
-          if (!selectedSize) { alert('Select a size first!'); return; }
-          addToCart('everyday-comfort-tee', 'Everyday Comfort Tee', 499, selectedColor, selectedSize, currentImageSrc);
-          alert('✅ Added to cart!');
-        ">
+        <button class="add-to-cart-btn" type="button" onclick="addToCart('everyday-comfort-tee', 'Everyday Comfort Tee', productPrice, selectedColor, selectedSize, currentImageSrc)">
           🛒 Add to Cart
         </button>
-      <button class="order-now-btn" type="button">
-  ✨ Order Now
-</button>
-</button>
-
-
+        <button class="order-now-btn" type="button" onclick="orderNow()">
+          ✨ Order Now
+        </button>
       </div>
 
       <!-- ❤️ WISHLIST -->
@@ -170,6 +171,7 @@
 var selectedColor = 'Light Gray';
 var selectedSize = 'S';
 var quantity = 1;
+var productPrice = 424.15;
 var currentImageSrc = 'images/products/everyday-comfort-tee-main.png';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -203,76 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
       qtyValue.textContent = quantity;
     });
   }
-
-  // ===== WISHLIST TOGGLE =====
-  const wishBtn = document.getElementById('wish-button');
-  const heartIcon = document.getElementById('heart-icon');
-  const wishText = document.getElementById('wish-text');
-  const productId = wishBtn.getAttribute('data-id');
-  
-  let wishlist = JSON.parse(localStorage.getItem('pxlpuff_wishlist') || '[]');
-  let isWished = wishlist.includes(productId);
-  
-  function updateWishlistUI() {
-    if (isWished) {
-      heartIcon.textContent = '♥';
-      heartIcon.style.color = '#800020';
-      wishText.textContent = 'In Wishlist';
-    } else {
-      heartIcon.textContent = '♡';
-      heartIcon.style.color = 'inherit';
-      wishText.textContent = 'Add to Wishlist';
-    }
-  }
-  
-  updateWishlistUI();
-  
-  wishBtn.addEventListener('click', function() {
-    isWished = !isWished;
-    if (isWished) {
-      if (!wishlist.includes(productId)) wishlist.push(productId);
-    } else {
-      wishlist = wishlist.filter(id => id !== productId);
-    }
-    localStorage.setItem('pxlpuff_wishlist', JSON.stringify(wishlist));
-    updateWishlistUI();
-  });
 });
-
-// ===== 5. ADD TO CART =====
-function addToCart(productId, name, price, color, size, imageSrc) {
-  if (!color) { alert('⚠️ Select a color first!'); return; }
-  if (!size) { alert('⚠️ Select a size first!'); return; }
-
-  const cart = JSON.parse(localStorage.getItem('pxlpuff_cart') || '[]');
-  const uniqueKey = `${productId}-${color}-${size}`;
-  const existingIndex = cart.findIndex(item => item.key === uniqueKey);
-
-  if (existingIndex !== -1) {
-    cart[existingIndex].quantity += quantity;
-  } else {
-    cart.push({
-      key: uniqueKey,
-      name: name,
-      price: price,
-      color: color,
-      size: size,
-      quantity: quantity,
-      image: imageSrc
-    });
-  }
-
-  localStorage.setItem('pxlpuff_cart', JSON.stringify(cart));
-  
-  const counter = document.querySelector('.cart-counter');
-  if (counter) {
-    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-    counter.textContent = total;
-    counter.style.display = total > 0 ? 'flex' : 'none';
-  }
-
-  alert(`✅ Added to cart!\n\nItem: ${name}\nColor: ${color}\nSize: ${size}\nQty: ${quantity}`);
-}
 </script>
 
 </body>

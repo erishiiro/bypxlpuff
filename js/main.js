@@ -146,12 +146,85 @@ switch(e.key.toLowerCase()) {
 }
 });
 
+// ===== ADD TO CART (product pages) =====
+function addToCart(productId, name, price, color, size, imageSrc) {
+  color = color || (typeof window.selectedColor !== 'undefined' ? window.selectedColor : '');
+  size = size || (typeof window.selectedSize !== 'undefined' ? window.selectedSize : '');
+  imageSrc = imageSrc || (typeof window.currentImageSrc !== 'undefined' ? window.currentImageSrc : '');
+
+  if (!color) { alert('Select a color first!'); return; }
+  if (!size) { alert('Select a size first!'); return; }
+
+  var qty = Number(typeof window.quantity !== 'undefined' ? window.quantity : 1) || 1;
+  var cart = getCart();
+  var uniqueKey = productId + '-' + color + '-' + size;
+  var existingIndex = cart.findIndex(function (item) { return item.key === uniqueKey; });
+
+  if (existingIndex !== -1) {
+    cart[existingIndex].quantity += qty;
+  } else {
+    cart.push({
+      key: uniqueKey,
+      id: productId,
+      name: name,
+      price: price,
+      color: color,
+      size: size,
+      quantity: qty,
+      image: imageSrc
+    });
+  }
+
+  saveCart(cart);
+  alert('✅ Added to cart!\n\nItem: ' + name + '\nColor: ' + color + '\nSize: ' + size + '\nQty: ' + qty);
+}
+
+// ===== PRODUCT PAGE WISHLIST (#wish-button) =====
+function initProductWishlist() {
+  var wishBtn = document.getElementById('wish-button');
+  if (!wishBtn) return;
+
+  var heartIcon = document.getElementById('heart-icon');
+  var wishText = document.getElementById('wish-text');
+  var productId = wishBtn.getAttribute('data-id');
+  if (!productId) return;
+
+  function isWished() {
+    return getWishlist().indexOf(productId) !== -1;
+  }
+
+  function updateWishlistUI() {
+    var on = isWished();
+    if (heartIcon) {
+      heartIcon.textContent = on ? '♥' : '♡';
+      heartIcon.style.color = on ? '#800020' : 'inherit';
+    }
+    if (wishText) {
+      wishText.textContent = on ? 'In Wishlist' : 'Add to Wishlist';
+    }
+  }
+
+  updateWishlistUI();
+
+  wishBtn.addEventListener('click', function () {
+    var list = getWishlist();
+    if (list.indexOf(productId) !== -1) {
+      list = list.filter(function (id) { return id !== productId; });
+    } else {
+      list.push(productId);
+    }
+    saveWishlist(list);
+    updateWishlistUI();
+  });
+}
+
 // ===== INITIALIZE =====
 document.addEventListener('DOMContentLoaded', function() {
 updateWishlistCounter();
 updateCartCounter();
 markActiveHearts();   
 attachHeartListeners();
+initProductWishlist();
 });
 
 
@@ -318,70 +391,84 @@ initSearchPage();
 // ✨ UNIVERSAL ORDER NOW FUNCTION
 // ======================================
 
+function orderNow() {
+  var productInfo = document.querySelector('.product-detail .info') || document.querySelector('.info');
+  if (!productInfo) {
+    alert('Could not find product details.');
+    return;
+  }
+
+  var nameEl = productInfo.querySelector('h1');
+  var priceEl =
+    productInfo.querySelector('.sale-price') ||
+    productInfo.querySelector('.price');
+  var productName = nameEl ? nameEl.textContent.trim() : 'Product';
+  var price = priceEl ? Number(priceEl.textContent.replace(/[^\d.]/g, '')) : 0;
+
+  var colorBtn =
+    productInfo.querySelector('#color-picker button[aria-pressed="true"]') ||
+    productInfo.querySelector('#color-picker button.selected') ||
+    productInfo.querySelector('#color-picker button[data-color]');
+
+  var sizeBtn = productInfo.querySelector('.size-btn.selected');
+  var qtyEl = productInfo.querySelector('.quantity-value');
+
+  var color =
+    (typeof window.selectedColor !== 'undefined' && window.selectedColor) ||
+    (colorBtn && colorBtn.getAttribute('data-color'));
+
+  var size =
+    (typeof window.selectedSize !== 'undefined' && window.selectedSize) ||
+    (sizeBtn && sizeBtn.getAttribute('data-size'));
+
+  var qty = Number(
+    (typeof window.quantity !== 'undefined' ? window.quantity : null) ||
+    (qtyEl && qtyEl.textContent) ||
+    1
+  );
+
+  if (!color) {
+    alert('Please select a color first!');
+    return;
+  }
+
+  if (!size) {
+    alert('Please select a size first!');
+    return;
+  }
+
+  var total = price * qty;
+  var emailTo = 'orders@examplewebsite142.com';
+  var subject = encodeURIComponent('New Order — ' + productName);
+  var LINE = '%0D%0A';
+  var body =
+    'Hello by pxlpuff Team!' + LINE + LINE +
+    'I would like to order the following item:' + LINE + LINE +
+    'Product: ' + productName + LINE +
+    'Color: ' + color + LINE +
+    'Size: ' + size + LINE +
+    'Quantity: ' + qty + LINE +
+    'Price: ₱' + price + ' each' + LINE +
+    'Total: ₱' + total + LINE + LINE +
+    'Your Name:' + LINE +
+    'Contact Number:' + LINE +
+    'Delivery Address:' + LINE + LINE +
+    'Thank you!';
+
+  // Open default/web email compose (same pattern as cart checkout)
+  window.open(
+    'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(emailTo) +
+    '&su=' + subject +
+    '&body=' + body,
+    '_blank'
+  );
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-
   document.querySelectorAll('.order-now-btn').forEach(function (button) {
-
-    button.addEventListener('click', function () {
-
-      const productInfo = button.closest('.info');
-      if (!productInfo) return;
-
-      const productName = productInfo.querySelector('h1').textContent.trim();
-
-      const priceText = productInfo.querySelector('.price').textContent;
-      const price = Number(priceText.replace(/[^\d.]/g, ''));
-
-      const selectedColorButton =
-        productInfo.querySelector('#color-picker button[style*="border: 3px solid rgb(0, 0, 0)"]');
-
-      const selectedSizeButton =
-        productInfo.querySelector('.size-btn.selected');
-
-      const quantity = Number(
-        productInfo.querySelector('.quantity-value').textContent
-      );
-
-      if (!selectedColorButton) {
-        alert('Please select a color first!');
-        return;
-      }
-
-      if (!selectedSizeButton) {
-        alert('Please select a size first!');
-        return;
-      }
-
-      const color = selectedColorButton.dataset.color;
-      const size = selectedSizeButton.dataset.size;
-      const total = price * quantity;
-
-      const emailTo = 'orders@examplewebsite142.com';
-
-      const subject = encodeURIComponent('New Order — ' + productName);
-
-      const body = encodeURIComponent(
-        'Hello by pxlpuff Team!\n\n' +
-        'I would like to order the following item:\n\n' +
-        'Product: ' + productName + '\n' +
-        'Color: ' + color + '\n' +
-        'Size: ' + size + '\n' +
-        'Quantity: ' + quantity + '\n' +
-        'Price: ₱' + price + ' each\n' +
-        'Total: ₱' + total + '\n\n' +
-        'Your Name:\n' +
-        'Contact Number:\n' +
-        'Delivery Address:\n\n' +
-        'Thank you!'
-      );
-
-      window.location.href =
-        'mailto:' + emailTo +
-        '?subject=' + subject +
-        '&body=' + body;
-
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      orderNow();
     });
-
   });
-
 });
