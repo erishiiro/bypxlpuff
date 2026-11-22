@@ -107,27 +107,51 @@
       </div>
 
       <!-- BUTTONS -->
-      <div class="action-buttons">
-        <button class="add-to-cart-btn" onclick="
-          if (!selectedColor) { alert('Select a color first!'); return; }
-          if (!selectedSize) { alert('Select a size first!'); return; }
-          addToCart('everyday-comfort-tee', 'Everyday Comfort Tee', 499, selectedColor, selectedSize, currentImageSrc);
-          alert('✅ Added to cart!');
-        ">
-          🛒 Add to Cart
-        </button>
-        <button class="order-now-btn" onclick="
-          if (!selectedColor) { alert('Select a color first!'); return; }
-          if (!selectedSize) { alert('Select a size first!'); return; }
-          addToCart('everyday-comfort-tee', 'Everyday Comfort Tee', 499, selectedColor, selectedSize, currentImageSrc);
-          window.location.href = 'cart.html';
-        ">
-          ✨ Order Now
-        </button>
-      </div>
+   <button class="add-to-cart-btn" onclick="
+  if (!selectedColor) { alert('Select a color first!'); return; }
+  if (!selectedSize) { alert('Select a size first!'); return; }
+  addToCart('dont-be-late-tee', 'Don\'t Be Late Tee', 499, selectedColor, selectedSize, currentImageSrc);
+  alert('✅ Added to cart!');
+">
+  🛒 Add to Cart
+</button>
+
+<button class="order-now-btn" type="button" onclick="
+  if (!selectedColor) { alert('Select a color first!'); return false; }
+  if (!selectedSize) { alert('Select a size first!'); return false; }
+
+  const productName = 'Don\'t Be Late Tee';
+  const emailTo = 'orders@examplewebsite142.com';
+  const price = 499;
+  const total = price * quantity;
+  const BR = '%0D%0A';
+
+  const emailBody = 
+    'Hello by pxlpuff Team,' + BR + BR +
+    'I would like to order the following item:' + BR +
+    '----------------------------------------' + BR +
+    'Product: ' + productName + BR +
+    'Color: ' + selectedColor + BR +
+    'Size: ' + selectedSize + BR +
+    'Quantity: ' + quantity + BR +
+    'Price: ₱' + price + ' each' + BR +
+    'Total: ₱' + total + BR +
+    '----------------------------------------' + BR + BR +
+    'Thank you!' + BR + BR +
+    'Your Name: ' + BR +
+    'Contact Number: ' + BR +
+    'Delivery Address: ' + BR;
+
+  const subject = encodeURIComponent('New Order — ' + productName);
+  window.open('https://mail.google.com/mail/?view=cm&to=' + emailTo + '&su=' + subject + '&body=' + emailBody, '_blank');
+  return false;
+">
+  ✨ Order Now
+</button>
+
 
       <!-- ❤️ WISHLIST -->
-      <button type="button" id="wish-button" data-id="everyday-comfort-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
+      <button type="button" id="wish-button" data-id="dont-be-late-tee" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; padding: 8px 0;">
         <span id="heart-icon" style="font-size: 20px; color: inherit;">♡</span>
         <span id="wish-text">Add to Wishlist</span>
       </button>
