@@ -31,39 +31,77 @@
       </a>
     </div>
   </header>
+  
+<main>
+  <section class="search-stage">
 
-  <main>
-    <section class="search-stage">
-      <span class="sparkle blue" aria-hidden="true">✦</span>
-      <span class="sparkle red" aria-hidden="true">✦</span>
-      <span class="sparkle green" aria-hidden="true">✦</span>
+    <!-- DECORATIVE SPARKLES -->
+    <span class="sparkle blue" aria-hidden="true">✦</span>
+    <span class="sparkle red" aria-hidden="true">✦</span>
+    <span class="sparkle green" aria-hidden="true">✦</span>
 
-      <h1>Your pixel magic awaits!</h1>
+    <h1>Your pixel magic awaits!</h1>
 
-      <form class="search-box d-flex align-items-center" action="#" method="get" role="search">
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input class="form-control" type="search" name="q" placeholder="Search our collection." aria-label="Search our collection">
-      </form>
+    <!-- SEARCH FORM -->
+    <form id="searchForm" class="search-box d-flex align-items-center" action="#" method="get" role="search">
 
-      <div class="recent">
-        <h2>Recent searches</h2>
-        <div class="chips d-flex">
-          <span class="chip">× Do Good Work Tee</span>
-          <span class="chip">× Don’t Be Late Tee</span>
-          <span class="chip">× Everyday Comfort Tee</span>
-        </div>
-        <a href="#" class="clear-all">Clear all</a>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+
+      <input
+        class="form-control"
+        type="search"
+        name="q"
+        placeholder="Search our collection."
+        aria-label="Search our collection"
+        required>
+
+    </form>
+
+    <!-- RECENT SEARCHES -->
+    <div class="recent">
+      <h2>Recent searches</h2>
+
+      <div class="chips d-flex" aria-live="polite">
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer d-flex align-items-center justify-content-between">
-    <span class="footer-logo" role="img" aria-label="by pxlpuff"></span>
-    <div class="footer-links d-flex flex-column">
-      <a href="privacy-policy.html" class="page-link">Privacy Policy</a>
-      <span class="page-link">Copyright</span>
+      <a href="#" class="clear-all">Clear all</a>
     </div>
-  </footer>
+
+  </section>
+</main>
+
+    <!-- HAMBURGER BUTTON -->
+<button class="hamburger-btn menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- MENU -->
+<nav class="hamburger-menu mobile-nav menu">
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="wishlist.html">Wishlist</a>
+  <a href="cart.html">Cart</a>
+  <a href="contact.html">Contact Us</a>
+  <a href="privacy-policy.html">Privacy Policy</a>
+</nav>
+
+<!-- FOOTER -->
+<footer class="site-footer d-flex align-items-center justify-content-between">
+  <span class="footer-logo" role="img" aria-label="by pxlpuff"></span>
+
+  <div class="footer-links d-flex flex-column">
+    <a href="privacy-policy.html" class="page-link">Privacy Policy</a>
+    <span class="page-link">Copyright</span>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script src="js/main.js"></script>
 
 </body>
 </html>
