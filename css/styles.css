@@ -181,7 +181,8 @@ svg {
 .page-wishlist main,
 .page-login main,
 .page-register main,
-.page-search main {
+.page-search main,
+.page-menu main {
   min-height: calc(715 * var(--p));
 }
 
@@ -275,10 +276,24 @@ svg {
   --bs-btn-focus-shadow-rgb: 143, 169, 189;
 }
 
+.btn-figma.sage {
+  --bs-btn-color: #000;
+  --bs-btn-bg: var(--sage);
+  --bs-btn-border-color: var(--sage);
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #97A78B;
+  --bs-btn-hover-border-color: #97A78B;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #97A78B;
+  --bs-btn-active-border-color: #97A78B;
+  --bs-btn-focus-shadow-rgb: 168, 184, 154;
+}
+
 .hero-image {
   flex: 0 0 calc(483 * var(--p));
+  width: calc(483 * var(--p));
   height: calc(379 * var(--p));
-  background: url("../images/hero.png") center / cover no-repeat;
+  object-fit: cover;
 }
 
 .whats-new {
@@ -305,12 +320,11 @@ svg {
 }
 
 .product-image {
+  display: block;
   width: 100%;
   height: calc(413 * var(--p));
-  background-color: transparent;
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
+  object-fit: contain;
+  object-position: center;
 }
 
 .product h3 {
@@ -341,8 +355,10 @@ svg {
 
 .about-image {
   flex: 0 0 calc(508 * var(--p));
+  width: calc(508 * var(--p));
   height: calc(366 * var(--p));
-  background: url("../images/about.jpg") 50% 50.1% / 113% auto no-repeat;
+  object-fit: cover;
+  object-position: center 50%;
 }
 
 .about-text {
@@ -395,12 +411,11 @@ svg {
 }
 
 .shop-card .img-box {
+  display: block;
   width: calc(306 * var(--p));
   height: calc(292 * var(--p));
-  background-color: transparent;
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
+  object-fit: contain;
+  object-position: center;
 }
 
 .shop-card h3 {
@@ -463,21 +478,21 @@ svg {
 }
 
 .thumb {
+  display: block;
+  width: 100%;
   height: calc(109 * var(--p));
-  background-color: transparent;
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
+  object-fit: contain;
+  object-position: center;
 }
 
 .main-image {
+  display: block;
   flex: 0 0 calc(300 * var(--p));
+  width: calc(300 * var(--p));
   height: calc(334 * var(--p));
   margin-left: calc(52 * var(--p));
-  background-color: transparent;
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
+  object-fit: contain;
+  object-position: center;
 }
 
 .info {
@@ -786,6 +801,74 @@ svg {
   margin-top: calc(11 * var(--p));
 }
 
+/* ---------- Hamburger Menu ---------- */
+.menu-stage {
+  padding: calc(78 * var(--p)) 0 calc(80 * var(--p)) calc(var(--pad) + 58 * var(--p));
+}
+
+.menu-stage h1 {
+  width: calc(779 * var(--p));
+  max-width: 100%;
+  font-size: calc(65 * var(--p));
+  line-height: calc(87 * var(--p));
+  color: var(--burgundy);
+}
+
+.menu-body {
+  align-items: flex-start;
+  gap: calc(155 * var(--p));
+  margin-top: calc(89 * var(--p));
+  margin-left: calc(41 * var(--p));
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  width: calc(338 * var(--p));
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(85 * var(--p));
+  padding: 0 calc(30 * var(--p)) 0 calc(38 * var(--p));
+  border-bottom: calc(1 * var(--p)) solid #000;
+  font-size: calc(20 * var(--p));
+  line-height: calc(31 * var(--p));
+}
+
+.menu-links svg {
+  width: calc(20 * var(--p));
+  height: calc(20 * var(--p));
+  flex-shrink: 0;
+}
+
+.menu-promo {
+  margin-top: calc(34 * var(--p));
+}
+
+.menu-promo p {
+  font-size: calc(20 * var(--p));
+  line-height: calc(31 * var(--p));
+}
+
+.menu-auth {
+  gap: calc(33 * var(--p));
+  margin-top: calc(59 * var(--p));
+}
+
+.btn-menu-auth {
+  display: block;
+  width: calc(212 * var(--p));
+  height: calc(50 * var(--p));
+  border-radius: calc(7 * var(--p));
+  font-size: calc(20 * var(--p));
+  font-weight: 400;
+  line-height: calc(50 * var(--p));
+  text-align: center;
+}
+
 /* ---------- Privacy Policy ---------- */
 .policy {
   position: relative;
@@ -1058,8 +1141,8 @@ svg {
   .footer-links { width: 100%; max-width: calc(305 * var(--p) * 1.4); margin-bottom: 0; }
 
   .page-shop main, .page-product main, .page-wishlist main, .page-login main,
-  .page-register main, .page-search main, .page-cart main, .page-privacy main,
-  .page-contact main { min-height: 0; }
+  .page-register main, .page-search main, .page-menu main, .page-cart main,
+  .page-privacy main, .page-contact main { min-height: 0; }
 
   /* Home */
   .hero {
@@ -1119,6 +1202,19 @@ svg {
   }
   .btn-auth { width: calc(212 * var(--p) * 0.8); }
 
+  /* Menu */
+  .menu-stage { padding: calc(40 * var(--p)) calc(24 * var(--p)); }
+  .menu-stage h1 { width: auto; font-size: calc(42 * var(--p)); line-height: calc(56 * var(--p)); }
+  .menu-body {
+    flex-direction: column;
+    gap: calc(40 * var(--p));
+    margin: calc(32 * var(--p)) 0 0;
+  }
+  .menu-links { width: 100%; max-width: calc(400 * var(--p)); }
+  .menu-promo { margin-top: 0; }
+  .menu-auth { flex-wrap: wrap; margin-top: calc(24 * var(--p)); }
+  .btn-menu-auth { width: calc(160 * var(--p)); }
+
   /* Privacy */
   .policy { min-height: 0; }
   .policy .block { display: none; }
@@ -1139,23 +1235,3 @@ svg {
   .sparkle { display: none; }
   .chips { flex-wrap: wrap; }
 }
-
-/* ---------- Product photos (cropped from the Figma images) ---------- */
-.pic-cart-do-good-work-tee { background-image: url("../images/products/cart-do-good-work-tee.png"); }
-.pic-cart-dont-be-late-tee { background-image: url("../images/products/cart-dont-be-late-tee.png"); }
-.pic-cart-everyday-comfort-tee { background-image: url("../images/products/cart-everyday-comfort-tee.png"); }
-.pic-do-good-work-tee-main { background-image: url("../images/products/do-good-work-tee-main.png"); }
-.pic-do-good-work-tee-thumb-1 { background-image: url("../images/products/do-good-work-tee-thumb-1.png"); }
-.pic-do-good-work-tee-thumb-2 { background-image: url("../images/products/do-good-work-tee-thumb-2.png"); }
-.pic-dont-be-late-tee-main { background-image: url("../images/products/dont-be-late-tee-main.png"); }
-.pic-dont-be-late-tee-thumb-1 { background-image: url("../images/products/dont-be-late-tee-thumb-1.png"); }
-.pic-dont-be-late-tee-thumb-2 { background-image: url("../images/products/dont-be-late-tee-thumb-2.png"); }
-.pic-everyday-comfort-tee-main { background-image: url("../images/products/everyday-comfort-tee-main.png"); }
-.pic-everyday-comfort-tee-thumb-1 { background-image: url("../images/products/everyday-comfort-tee-thumb-1.png"); }
-.pic-everyday-comfort-tee-thumb-2 { background-image: url("../images/products/everyday-comfort-tee-thumb-2.png"); }
-.pic-home-do-good-work-tee { background-image: url("../images/products/home-do-good-work-tee.png"); }
-.pic-home-dont-be-late-tee { background-image: url("../images/products/home-dont-be-late-tee.png"); }
-.pic-home-everyday-comfort-tee { background-image: url("../images/products/home-everyday-comfort-tee.png"); }
-.pic-shop-do-good-work-tee { background-image: url("../images/products/shop-do-good-work-tee.png"); }
-.pic-shop-dont-be-late-tee { background-image: url("../images/products/shop-dont-be-late-tee.png"); }
-.pic-shop-everyday-comfort-tee { background-image: url("../images/products/shop-everyday-comfort-tee.png"); }
