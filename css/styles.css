@@ -145,9 +145,15 @@ svg {
 .footer-links {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
   gap: calc(13 * var(--p));
   width: calc(305 * var(--p));
-  margin-bottom: calc(13 * var(--p));
+  margin: 0;
+}
+
+.footer-links .page-link {
+  width: 100%;
 }
 
 .page-link {
@@ -192,8 +198,13 @@ svg {
 .page-menu main,
 .page-popular main,
 .page-all-shirts main,
-.page-new-arrivals main {
+.page-new-arrivals main,
+.page-sale main {
   min-height: calc(715 * var(--p));
+}
+
+.page-sale main {
+  padding-bottom: calc(80 * var(--p));
 }
 
 .page-cart main,
@@ -1084,7 +1095,7 @@ svg {
     gap: calc(16 * var(--p));
     padding: calc(24 * var(--p));
   }
-  .footer-links { width: 100%; max-width: calc(305 * var(--p) * 1.4); margin-bottom: 0; }
+  .footer-links { width: 100%; max-width: calc(305 * var(--p) * 1.4); margin: 0; }
 
   .page-shop main, .page-product main, .page-wishlist main, .page-login main,
   .page-register main, .page-search main, .page-cart main, .page-privacy main,
@@ -2244,7 +2255,8 @@ button.color-btn {
 
 .page-popular .shop-grid,
 .page-all-shirts .shop-grid,
-.page-new-arrivals .shop-grid {
+.page-new-arrivals .shop-grid,
+.page-sale .shop-grid {
   margin-top: calc(36 * var(--p));
 }
 
@@ -2262,6 +2274,37 @@ button.color-btn {
   width: calc(22 * var(--p));
   height: calc(22 * var(--p));
   color: var(--mid-grey);
+}
+
+.shop-card .sale-prices {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: calc(12 * var(--p));
+  margin-top: calc(10 * var(--p));
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(36 * var(--p));
+  font-weight: 700;
+  line-height: calc(40 * var(--p));
+}
+
+.shop-card .original-price {
+  color: var(--mid-grey, #9a9a9a);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.shop-card .sale-price {
+  color: var(--burgundy);
+}
+
+.shop-card .discount-label {
+  margin-top: calc(4 * var(--p));
+  font-family: 'Poppins', sans-serif;
+  font-size: calc(22 * var(--p));
+  font-weight: 600;
+  line-height: calc(28 * var(--p));
+  color: var(--burgundy);
 }
 
 .hamburger-menu {
