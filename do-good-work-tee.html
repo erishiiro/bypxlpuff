@@ -70,20 +70,16 @@
       <!-- COLOR SELECTION -->
       <p style="margin-bottom: 8px;"><strong>COLOUR:</strong></p>
       <div id="color-picker" style="display: flex; gap: 12px;">
-        <button
-          type="button"
+        <button 
+          type="button" 
           data-color="Peach Cream"
           data-image="images/products/do-good-work-tee-main.png"
-          data-thumb-1="images/products/do-good-work-tee-thumb-1.png"
-          data-thumb-2="images/products/do-good-work-tee-thumb-2.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #FCEEE0; border: 3px solid #000; cursor: pointer; padding: 0;"
         ></button>
-        <button
-          type="button"
+        <button 
+          type="button" 
           data-color="Lavender"
-          data-image="images/products/do-good-work-tee-main-lilac.png"
-          data-thumb-1="images/products/do-good-work-tee-thumb-1-lilac.png"
-          data-thumb-2="images/products/do-good-work-tee-thumb-2-lilac.png"
+          data-image="images/products/do-good-work-tee-main.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #E3CEF7; border: 3px solid #ccc; cursor: pointer; padding: 0;"
         ></button>
       </div>
@@ -114,41 +110,9 @@
         ">
           🛒 Add to Cart
         </button>
-        <button class="order-now-btn" type="button" onclick="
-  if (!selectedColor) { alert('Select a color first!'); return false; }
-  if (!selectedSize) { alert('Select a size first!'); return false; }
-
-  const productName = 'Do Good Work Tee';
-  const emailTo = 'orders@examplewebsite142.com';
-  const price = 499;
-  const total = price * quantity;
-  const BR = '%0D%0A';
-
-  const emailBody = 
-    'Hello by pxlpuff Team,' + BR + BR +
-    'I would like to order the following item:' + BR +
-    '----------------------------------------' + BR +
-    'Product: ' + productName + BR +
-    'Color: ' + selectedColor + BR +
-    'Size: ' + selectedSize + BR +
-    'Quantity: ' + quantity + BR +
-    'Price: ₱' + price + ' each' + BR +
-    'Total: ₱' + total + BR +
-    '----------------------------------------' + BR + BR +
-    'Thank you!' + BR + BR +
-    'Your Name: ' + BR +
-    'Contact Number: ' + BR +
-    'Delivery Address: ' + BR;
-
-  const subject = encodeURIComponent('New Order — ' + productName);
-  window.open('https://mail.google.com/mail/?view=cm&to=' + emailTo + '&su=' + subject + '&body=' + emailBody, '_blank');
-  return false;
-">
+       <button class="order-now-btn" type="button">
   ✨ Order Now
 </button>
-
-
-
 
       </div>
 
@@ -188,22 +152,36 @@
   <span class="footer-logo" role="img" aria-label="by pxlpuff"></span>
   <div class="footer-links d-flex flex-column">
     <a href="privacy-policy.html" class="page-link">Privacy Policy</a>
+    <span class="page-link">Copyright</span>
   </div>
 </footer>
 
 <script src="js/main.js"></script>
-<script src="js/color-picker.js"></script>
 
 <script>
 // ===== GLOBAL VARIABLES =====
-var selectedColor = 'Peach Cream';
-var selectedSize = 'S';
-var quantity = 1;
-var currentImageSrc = 'images/products/do-good-work-tee-main.png';
+let selectedColor = 'Peach Cream';
+let selectedSize = 'S';
+let quantity = 1;
+let currentImageSrc = 'images/products/do-good-work-tee-main.png';
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ===== SIZE BUTTONS =====
+  // ===== 1. COLOR BUTTONS — CHANGE IMAGE =====
+  const colorButtons = document.querySelectorAll('#color-picker button');
+  const mainImg = document.querySelector('#main-product-image img');
+
+  colorButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      colorButtons.forEach(b => b.style.border = '3px solid #ccc');
+      this.style.border = '3px solid #000';
+      selectedColor = this.getAttribute('data-color');
+      currentImageSrc = this.getAttribute('data-image');
+      if (mainImg) mainImg.src = currentImageSrc;
+    });
+  });
+
+  // ===== 2. SIZE BUTTONS =====
   const sizeButtons = document.querySelectorAll('.size-btn');
   sizeButtons.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -213,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ===== QUANTITY BUTTONS =====
+  // ===== 3. QUANTITY BUTTONS =====
   const minusBtn = document.querySelector('.qty-minus');
   const plusBtn = document.querySelector('.qty-plus');
   const qtyValue = document.querySelector('.quantity-value');
@@ -233,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ===== WISHLIST TOGGLE =====
+  // ===== 4. WISHLIST TOGGLE =====
   const wishBtn = document.getElementById('wish-button');
   const heartIcon = document.getElementById('heart-icon');
   const wishText = document.getElementById('wish-text');
