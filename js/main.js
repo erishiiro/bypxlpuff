@@ -81,69 +81,82 @@ document.querySelectorAll('.heart-btn').forEach(btn => {
 
 // ===== HAMBURGER MENU TOGGLE =====
 function toggleHamburgerMenu() {
-const menu = document.querySelector('.hamburger-menu') 
-          || document.querySelector('.mobile-nav') 
-          || document.querySelector('.menu');
-
-const menuButton = document.querySelector('.hamburger-btn') 
+  var menu = document.querySelector('.hamburger-menu')
+            || document.querySelector('.mobile-nav')
+            || document.querySelector('.menu');
+  var menuButton = document.querySelector('.hamburger-btn')
                 || document.querySelector('.menu-toggle');
 
-if (!menu) {
-  console.log('Menu not found — check your class names!');
-  return;
+  if (!menu) {
+    window.location.href = 'menu.html';
+    return;
+  }
+
+  menu.classList.toggle('open');
+  var isOpen = menu.classList.contains('open');
+  if (menuButton) {
+    menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
 }
 
-menu.classList.toggle('open');
-
-const isOpen = menu.classList.contains('open');
-if (menuButton) {
-  menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-}
+function attachHamburgerListener() {
+  var menuButton = document.querySelector('.hamburger-btn')
+                || document.querySelector('.menu-toggle');
+  if (!menuButton || menuButton.dataset.menuBound === '1') return;
+  menuButton.dataset.menuBound = '1';
+  menuButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    toggleHamburgerMenu();
+  });
 }
 
 // ===== ⌨️ KEYBOARD SHORTCUTS =====
+// M  Hamburger Menu | H Home | E Contact | W Wishlist
+// C  Cart | P Privacy | / Search | X Copyright | S Shop
+// Tab is left alone for normal focus navigation.
 document.addEventListener('keydown', function(e) {
-const activeTag = document.activeElement.tagName;
-if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+  var activeTag = document.activeElement.tagName;
+  if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+  if (e.key === 'Tab' || e.ctrlKey || e.metaKey || e.altKey) return;
 
-switch(e.key.toLowerCase()) {
-  case 'tab':
-    e.preventDefault();
-    toggleHamburgerMenu();
-    break;
-  case 'h':
-    e.preventDefault();
-    window.location.href = 'index.html';
-    break;
-  case 's':
-    e.preventDefault();
-    window.location.href = 'shop.html';
-    break;
-  case 'e':
-    e.preventDefault();
-    window.location.href = 'contact.html';
-    break;
-  case 'w':
-    e.preventDefault();
-    window.location.href = 'wishlist.html';
-    break;
-  case 'c':
-    e.preventDefault();
-    window.location.href = 'cart.html';
-    break;
-  case 'p':
-    e.preventDefault();
-    window.location.href = 'privacy-policy.html';
-    break;
-  case '/':
-    e.preventDefault();
-    window.location.href = 'search.html';
-    break;
-  case 'x':
-    e.preventDefault();
-    alert('© 2026 by pxlpuff — All Rights Reserved');
-    break;
-}
+  switch (e.key.toLowerCase()) {
+    case 'm': // Hamburger Menu
+      e.preventDefault();
+      toggleHamburgerMenu();
+      break;
+    case 'h': // Home Page
+      e.preventDefault();
+      window.location.href = 'index.html';
+      break;
+    case 'e': // Contact Us
+      e.preventDefault();
+      window.location.href = 'contact.html';
+      break;
+    case 'w': // Wishlist
+      e.preventDefault();
+      window.location.href = 'wishlist.html';
+      break;
+    case 'c': // Cart
+      e.preventDefault();
+      window.location.href = 'cart.html';
+      break;
+    case 'p': // Privacy Policy
+      e.preventDefault();
+      window.location.href = 'privacy-policy.html';
+      break;
+    case '/': // Search
+      e.preventDefault();
+      window.location.href = 'search.html';
+      break;
+    case 'x': // Copyright
+      e.preventDefault();
+      alert('© 2026 by pxlpuff — All Rights Reserved');
+      break;
+    case 's': // Shop
+      e.preventDefault();
+      window.location.href = 'shop.html';
+      break;
+  }
 });
 
 // ===== ADD TO CART (product pages) =====
@@ -225,6 +238,7 @@ updateCartCounter();
 markActiveHearts();   
 attachHeartListeners();
 initProductWishlist();
+attachHamburgerListener();
 });
 
 

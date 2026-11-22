@@ -48,6 +48,17 @@ a {
   text-decoration: none;
 }
 
+/* Consistent Tab focus ring on every page */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
 h1, h2, h3, h4, p {
   margin: 0;
 }
@@ -1114,6 +1125,11 @@ svg {
   font-size: calc(20 * var(--p));
 }
 
+.search-box input:focus-visible {
+  outline: 3px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
 .recent {
   position: absolute;
   top: calc(382 * var(--p));
@@ -1432,6 +1448,11 @@ svg {
   font-size: 1rem;
   outline: none;
   background: transparent;
+}
+
+.qty-input:focus-visible {
+  outline: 3px solid var(--burgundy);
+  outline-offset: 3px;
 }
 
 /* Action Buttons */
