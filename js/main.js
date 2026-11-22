@@ -312,37 +312,34 @@ initSearchPage();
 
 
 
- // ======================================
- // ✨ UNIVERSAL ORDER NOW FUNCTION
- // ======================================
+ 
+// ======================================
+// ✨ UNIVERSAL ORDER NOW FUNCTION
+// ======================================
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  const orderButtons = document.querySelectorAll('.order-now-btn');
-
-  orderButtons.forEach(function (button) {
+  document.querySelectorAll('.order-now-btn').forEach(function (button) {
 
     button.addEventListener('click', function () {
 
       const productInfo = button.closest('.info');
-
       if (!productInfo) return;
 
       const productName = productInfo.querySelector('h1').textContent.trim();
 
-      const priceText = productInfo.querySelector('.price').textContent.trim();
+      const priceText = productInfo.querySelector('.price').textContent;
       const price = Number(priceText.replace(/[^\d.]/g, ''));
 
-      const colorButtons = productInfo.querySelectorAll('#color-picker button');
+      const selectedColorButton =
+      productInfo.querySelector('#color-picker button[style*="border: 3px solid rgb(0, 0, 0)"]');
 
-      const selectedColorButton = Array.from(colorButtons).find(function (btn) {
-        return btn.style.borderColor === 'rgb(0, 0, 0)';
-      });
+      const selectedSizeButton =
+        productInfo.querySelector('.size-btn.selected');
 
-      const selectedSizeButton = productInfo.querySelector('.size-btn.selected');
-
-      const quantityText = productInfo.querySelector('.quantity-value');
-      const quantity = Number(quantityText ? quantityText.textContent : 1);
+      const quantity = Number(
+        productInfo.querySelector('.quantity-value').textContent
+      );
 
       if (!selectedColorButton) {
         alert('Please select a color first!');
@@ -377,10 +374,13 @@ document.addEventListener('DOMContentLoaded', function () {
         'Thank you!'
       );
 
-      window.location.href =
-        'mailto:' + emailTo +
-        '?subject=' + subject +
-        '&body=' + body;
+      window.open(
+        'https://mail.google.com/mail/?view=cm&to=' +
+        encodeURIComponent(emailTo) +
+        '&su=' + subject +
+        '&body=' + body,
+        '_blank'
+      );
 
     });
 
