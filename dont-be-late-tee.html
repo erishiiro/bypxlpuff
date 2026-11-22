@@ -71,9 +71,10 @@
       <p style="margin-bottom: 8px;"><strong>COLOUR:</strong></p>
       <div id="color-picker" style="display: flex; gap: 12px;">
         <button 
-          type="button" 
-          data-color="Rose"
-          data-image="images/products/dont-be-late-tee-main.png"
+        type="button"
+        class="selected"
+        data-color="Rose"
+        data-image="images/products/dont-be-late-tee-main.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #D97282; border: 3px solid #000; cursor: pointer; padding: 0;"
         ></button>
         <button 
@@ -163,8 +164,9 @@
 
 <script src="js/main.js"></script>
 
+
 <script>
-// ===== GLOBAL VARIABLES =====
+// ===== PRODUCT OPTIONS =====
 let selectedColor = 'Rose';
 let selectedSize = 'S';
 let quantity = 1;
@@ -172,120 +174,57 @@ let currentImageSrc = 'images/products/dont-be-late-tee-main.png';
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ===== 1. COLOR BUTTONS — CHANGE IMAGE =====
+  // COLOR BUTTONS
   const colorButtons = document.querySelectorAll('#color-picker button');
   const mainImg = document.querySelector('#main-product-image img');
 
   colorButtons.forEach(btn => {
     btn.addEventListener('click', function() {
-      colorButtons.forEach(b => b.style.border = '3px solid #ccc');
+
+      colorButtons.forEach(b => {
+        b.style.border = '3px solid #ccc';
+        b.classList.remove('selected');
+      });
+
       this.style.border = '3px solid #000';
-      selectedColor = this.getAttribute('data-color');
-      currentImageSrc = this.getAttribute('data-image');
+      this.classList.add('selected');
+
+      selectedColor = this.dataset.color;
+      currentImageSrc = this.dataset.image;
+
       if (mainImg) mainImg.src = currentImageSrc;
     });
   });
 
-  // ===== 2. SIZE BUTTONS =====
-  const sizeButtons = document.querySelectorAll('.size-btn');
-  sizeButtons.forEach(btn => {
+  // SIZE BUTTONS
+  document.querySelectorAll('.size-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-      sizeButtons.forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
       this.classList.add('selected');
-      selectedSize = this.getAttribute('data-size');
+      selectedSize = this.dataset.size;
     });
   });
 
-  // ===== 3. QUANTITY BUTTONS =====
+  // QUANTITY BUTTONS
   const minusBtn = document.querySelector('.qty-minus');
   const plusBtn = document.querySelector('.qty-plus');
   const qtyValue = document.querySelector('.quantity-value');
 
-  if (minusBtn) {
-    minusBtn.addEventListener('click', function() {
-      if (quantity > 1) {
-        quantity--;
-        qtyValue.textContent = quantity;
-      }
-    });
-  }
-  if (plusBtn) {
-    plusBtn.addEventListener('click', function() {
-      quantity++;
+  minusBtn.addEventListener('click', function() {
+    if (quantity > 1) {
+      quantity--;
       qtyValue.textContent = quantity;
-    });
-  }
-
-  // ===== 4. WISHLIST TOGGLE =====
-  const wishBtn = document.getElementById('wish-button');
-  const heartIcon = document.getElementById('heart-icon');
-  const wishText = document.getElementById('wish-text');
-  const productId = wishBtn.getAttribute('data-id');
-  
-  let wishlist = JSON.parse(localStorage.getItem('pxlpuff_wishlist') || '[]');
-  let isWished = wishlist.includes(productId);
-  
-  function updateWishlistUI() {
-    if (isWished) {
-      heartIcon.textContent = '♥';
-      heartIcon.style.color = '#800020';
-      wishText.textContent = 'In Wishlist';
-    } else {
-      heartIcon.textContent = '♡';
-      heartIcon.style.color = 'inherit';
-      wishText.textContent = 'Add to Wishlist';
     }
-  }
-  
-  updateWishlistUI();
-  
-  wishBtn.addEventListener('click', function() {
-    isWished = !isWished;
-    if (isWished) {
-      if (!wishlist.includes(productId)) wishlist.push(productId);
-    } else {
-      wishlist = wishlist.filter(id => id !== productId);
-    }
-    localStorage.setItem('pxlpuff_wishlist', JSON.stringify(wishlist));
-    updateWishlistUI();
   });
+
+  plusBtn.addEventListener('click', function() {
+    quantity++;
+    qtyValue.textContent = quantity;
+  });
+
 });
-
-// ===== 5. ADD TO CART =====
-function addToCart(productId, name, price, color, size, imageSrc) {
-  if (!color) { alert('⚠️ Select a color first!'); return; }
-  if (!size) { alert('⚠️ Select a size first!'); return; }
-
-  const cart = JSON.parse(localStorage.getItem('pxlpuff_cart') || '[]');
-  const uniqueKey = `${productId}-${color}-${size}`;
-  const existingIndex = cart.findIndex(item => item.key === uniqueKey);
-
-  if (existingIndex !== -1) {
-    cart[existingIndex].quantity += quantity;
-  } else {
-    cart.push({
-      key: uniqueKey,
-      name: name,
-      price: price,
-      color: color,
-      size: size,
-      quantity: quantity,
-      image: imageSrc
-    });
-  }
-
-  localStorage.setItem('pxlpuff_cart', JSON.stringify(cart));
-  
-  const counter = document.querySelector('.cart-counter');
-  if (counter) {
-    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-    counter.textContent = total;
-    counter.style.display = total > 0 ? 'flex' : 'none';
-  }
-
-  alert(`✅ Added to cart!\n\nItem: ${name}\nColor: ${color}\nSize: ${size}\nQty: ${quantity}`);
-}
 </script>
-
 </body>
 </html>
+
+
