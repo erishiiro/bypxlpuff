@@ -59,7 +59,7 @@
       <img class="thumb" src="images/products/everyday-comfort-tee-thumb-2.png" alt="Everyday Comfort Tee, back view">
     </div>
     <div id="main-product-image" style="width:300px;height:375px;">
-      <img src="images/products/everyday-comfort-tee-thumb-1.png" alt="Everyday Comfort Tee - Light Gray" style="width:100%;height:100%;object-fit:cover;">
+      <img src="images/products/everyday-comfort-tee-main.png" alt="Everyday Comfort Tee - Light Gray" style="width:100%;height:100%;object-fit:cover;">
     </div>
 
     <div class="info">
@@ -70,16 +70,21 @@
       <!-- COLOR SELECTION -->
       <p style="margin-bottom: 8px;"><strong>COLOUR:</strong></p>
       <div id="color-picker" style="display: flex; gap: 12px;">
-        <button 
-          type="button" 
+        <button
+          type="button"
+          class="selected"
           data-color="Light Gray"
-          data-image="images/products/everyday-comfort-tee-thumb-1.png"
+          data-image="images/products/everyday-comfort-tee-main.png"
+          data-thumb-1="images/products/everyday-comfort-tee-thumb-1.png"
+          data-thumb-2="images/products/everyday-comfort-tee-thumb-2.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #E2E2E2; border: 3px solid #000; cursor: pointer; padding: 0;"
         ></button>
-        <button 
-          type="button" 
-          data-color="SAge"
-          data-image="images/products/everyday-comfort-tee-thumb-1.png"
+        <button
+          type="button"
+          data-color="Sage"
+          data-image="images/products/shop-everyday-comfort-tee-sage.png"
+          data-thumb-1="images/products/everyday-comfort-tee-thumb-1-sage.png"
+          data-thumb-2="images/products/everyday-comfort-tee-thumb-2-sage.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #A8B89A; border: 3px solid #ccc; cursor: pointer; padding: 0;"
         ></button>
       </div>
@@ -158,31 +163,18 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/color-picker.js"></script>
 
 <script>
 // ===== GLOBAL VARIABLES =====
-let selectedColor = 'Light Gray';
-let selectedSize = 'S';
-let quantity = 1;
-let currentImageSrc = 'images/products/everyday-comfort-tee-thumb-1.png';
+var selectedColor = 'Light Gray';
+var selectedSize = 'S';
+var quantity = 1;
+var currentImageSrc = 'images/products/everyday-comfort-tee-main.png';
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ===== 1. COLOR BUTTONS — CHANGE IMAGE =====
-  const colorButtons = document.querySelectorAll('#color-picker button');
-  const mainImg = document.querySelector('#main-product-image img');
-
-  colorButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      colorButtons.forEach(b => b.style.border = '3px solid #ccc');
-      this.style.border = '3px solid #000';
-      selectedColor = this.getAttribute('data-color');
-      currentImageSrc = this.getAttribute('data-image');
-      if (mainImg) mainImg.src = currentImageSrc;
-    });
-  });
-
-  // ===== 2. SIZE BUTTONS =====
+  // ===== SIZE BUTTONS =====
   const sizeButtons = document.querySelectorAll('.size-btn');
   sizeButtons.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -192,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ===== 3. QUANTITY BUTTONS =====
+  // ===== QUANTITY BUTTONS =====
   const minusBtn = document.querySelector('.qty-minus');
   const plusBtn = document.querySelector('.qty-plus');
   const qtyValue = document.querySelector('.quantity-value');
@@ -212,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ===== 4. WISHLIST TOGGLE =====
+  // ===== WISHLIST TOGGLE =====
   const wishBtn = document.getElementById('wish-button');
   const heartIcon = document.getElementById('heart-icon');
   const wishText = document.getElementById('wish-text');

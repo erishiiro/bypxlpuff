@@ -70,23 +70,29 @@
       <!-- COLOR SELECTION -->
       <p style="margin-bottom: 8px;"><strong>COLOUR:</strong></p>
       <div id="color-picker" style="display: flex; gap: 12px;">
-        <button 
-        type="button"
-        class="selected"
-        data-color="Rose"
-        data-image="images/products/dont-be-late-tee-main.png"
+        <button
+          type="button"
+          class="selected"
+          data-color="Rose"
+          data-image="images/products/dont-be-late-tee-main.png"
+          data-thumb-1="images/products/dont-be-late-tee-thumb-1.png"
+          data-thumb-2="images/products/dont-be-late-tee-thumb-2.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #D97282; border: 3px solid #000; cursor: pointer; padding: 0;"
         ></button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           data-color="Sage"
-          data-image="images/products/dont-be-late-tee-main.png"
+          data-image="images/products/dont-be-late-tee-thumb-1-sage.png"
+          data-thumb-1="images/products/dont-be-late-tee-thumb-1-sage.png"
+          data-thumb-2="images/products/dont-be-late-tee-thumb-2-sage.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #A8B89A; border: 3px solid #ccc; cursor: pointer; padding: 0;"
         ></button>
-        <button 
-          type="button" 
+        <button
+          type="button"
           data-color="Blue"
-          data-image="images/products/dont-be-late-tee-main.png"
+          data-image="images/products/cart-dont-be-late-tee-main-blue.png"
+          data-thumb-1="images/products/cart-dont-be-late-tee-main-blue.png"
+          data-thumb-2="images/products/dont-be-late-tee-thumb-2-blue.png"
           style="width: 26px; height: 26px; border-radius: 50%; background: #8FA9BD; border: 3px solid #ccc; cursor: pointer; padding: 0;"
         ></button>
       </div>
@@ -163,38 +169,16 @@
 </footer>
 
 <script src="js/main.js"></script>
-
+<script src="js/color-picker.js"></script>
 
 <script>
 // ===== PRODUCT OPTIONS =====
-let selectedColor = 'Rose';
-let selectedSize = 'S';
-let quantity = 1;
-let currentImageSrc = 'images/products/dont-be-late-tee-main.png';
+var selectedColor = 'Rose';
+var selectedSize = 'S';
+var quantity = 1;
+var currentImageSrc = 'images/products/dont-be-late-tee-main.png';
 
 document.addEventListener('DOMContentLoaded', function() {
-
-  // COLOR BUTTONS
-  const colorButtons = document.querySelectorAll('#color-picker button');
-  const mainImg = document.querySelector('#main-product-image img');
-
-  colorButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-
-      colorButtons.forEach(b => {
-        b.style.border = '3px solid #ccc';
-        b.classList.remove('selected');
-      });
-
-      this.style.border = '3px solid #000';
-      this.classList.add('selected');
-
-      selectedColor = this.dataset.color;
-      currentImageSrc = this.dataset.image;
-
-      if (mainImg) mainImg.src = currentImageSrc;
-    });
-  });
 
   // SIZE BUTTONS
   document.querySelectorAll('.size-btn').forEach(btn => {
