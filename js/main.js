@@ -313,6 +313,7 @@ initSearchPage();
 
 
  
+
 // ======================================
 // ✨ UNIVERSAL ORDER NOW FUNCTION
 // ======================================
@@ -332,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const price = Number(priceText.replace(/[^\d.]/g, ''));
 
       const selectedColorButton =
-      productInfo.querySelector('#color-picker button[style*="border: 3px solid rgb(0, 0, 0)"]');
+        productInfo.querySelector('#color-picker button[style*="border: 3px solid rgb(0, 0, 0)"]');
 
       const selectedSizeButton =
         productInfo.querySelector('.size-btn.selected');
@@ -374,13 +375,10 @@ document.addEventListener('DOMContentLoaded', function () {
         'Thank you!'
       );
 
-      window.open(
-        'https://mail.google.com/mail/?view=cm&to=' +
-        encodeURIComponent(emailTo) +
-        '&su=' + subject +
-        '&body=' + body,
-        '_blank'
-      );
+      window.location.href =
+        'mailto:' + emailTo +
+        '?subject=' + subject +
+        '&body=' + body;
 
     });
 
